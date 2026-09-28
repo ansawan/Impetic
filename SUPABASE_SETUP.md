@@ -11,7 +11,7 @@ Follow these simple steps to connect your Supabase project to your website's Blo
 ---
 
 ## 2. Environment Variables Configuration
-In your local project root (`d:\CodeFlux`), create or edit `.env.local`:
+In your local project root (`d:\Impetic`), create or edit `.env.local`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
