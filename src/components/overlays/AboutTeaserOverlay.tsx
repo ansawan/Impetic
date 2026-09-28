@@ -20,7 +20,7 @@ export function AboutTeaserOverlay() {
           />
 
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-white leading-relaxed mt-6">
-            Code Flux started as a small team frustrated with agencies that ship code but not outcomes. Today we build and grow full digital products — engineering, AI, and marketing under one roof.
+            Impetic started as a small team frustrated with agencies that ship code but not outcomes. Today we build and grow full digital products — engineering, AI, and marketing under one roof.
           </p>
 
           {/* Compact Inline Stats Row */}

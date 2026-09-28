@@ -56,7 +56,7 @@ export default function AboutPage() {
     {
       year: '2022',
       title: 'Founding & Vision',
-      description: 'Code Flux was established with a singular focus: delivering high-performance WebGL and full-stack platforms.',
+      description: 'Impetic was established with a singular focus: delivering high-performance WebGL and full-stack platforms.',
     },
     {
       year: '2023',
@@ -87,7 +87,7 @@ export default function AboutPage() {
         <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
           <PageHero
             eyebrow="our story & ethos"
-            title="About Code Flux"
+            title="About Impetic"
             description="We are a elite engineering collective building high-throughput web applications, intelligent AI systems, and immersive WebGL experiences."
           />
 
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 eyebrow="Guiding Principles"
                 title={
                   <>
-                    What Drives <span className="flux-word">Code Flux</span>
+                    What Drives <span className="flux-word">Impetic</span>
                   </>
                 }
                 description="The engineering standards and values that inform every line of code we write."

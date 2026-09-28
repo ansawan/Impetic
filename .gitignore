@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+!.env.example
+
+# static export / deploy bundles
+/Impetic/
+*.zip
+
+# local scratch files
+/scratch/
+scratch-test.mjs

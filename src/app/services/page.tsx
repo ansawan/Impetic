@@ -33,43 +33,53 @@ const SERVICES_KEYFRAMES = [
 ]
 
 export default function ServicesPage() {
-  const stage1SoftwareDev = [
-    { title: 'Custom Web Applications', description: 'High-performance React/Next.js platforms built for real-time responsiveness and scale.' },
-    { title: 'SaaS Application Development', description: 'End-to-end multi-tenant SaaS architecture, billing integration, and tenant isolation.' },
-    { title: 'Mobile App Development', description: 'Cross-platform iOS and Android applications with native-level performance and fluid UX.' },
-    { title: 'Product Engineering & Architecture', description: 'Strategic technical architecture, domain-driven design, and scalable system blueprints.' },
-    { title: 'API Development & Integration', description: 'Type-safe GraphQL and REST APIs, gRPC microservices, and third-party webhook systems.' },
-    { title: 'Legacy System Modernization', description: 'Refactoring monolithic systems into modern cloud-native architectures with zero downtime.' },
+  const stageAIAutomation = [
+    { title: 'LLM & Chatbot Integration', description: 'Production-grade conversational interfaces wired into your real data and business workflows.', href: '/services/llm-chatbot-integration' },
+    { title: 'Retrieval-Augmented Generation (RAG)', description: 'Grounding model outputs in your own documents, vector indices, and knowledge bases.', href: '/services/rag-retrieval-augmented-generation' },
+    { title: 'Agentic AI / Custom AI Agents', description: 'Multi-step autonomous AI agents that execute real actions, tool calls, and automated decisions.', href: '/services/custom-ai-agents' },
+    { title: 'Workflow & Business Process Automation', description: 'Replacing manual, repetitive operations with reliable automated pipelines and SLA guarantees.', href: '/services/workflow-process-automation' },
+    { title: 'Predictive Analytics & ML Models', description: 'Custom forecasting, scoring, and classification models trained on your proprietary data.', href: '/services/predictive-analytics-ml' },
+    { title: 'AI-Powered Search & Recommendations', description: 'Semantic vector search and personalization engines that understand user intent.', href: '/services/ai-search-recommendations' },
+    { title: 'Model Fine-Tuning & Evaluation', description: 'Tailoring open-weight and proprietary models against real-world edge cases and evaluation benchmarks.', href: '/services/model-fine-tuning-evaluation' },
+    { title: 'MLOps & Model Deployment', description: 'Model versioning, latency monitoring, cost tracking, and automated CI/CD model rollouts.', href: '/services/mlops-model-deployment' },
   ]
 
-  const stage2AIAutomation = [
-    { title: 'LLM & Chatbot Integration', description: 'Production-grade conversational interfaces wired into your real data and business workflows.' },
-    { title: 'Retrieval-Augmented Generation (RAG)', description: 'Grounding model outputs in your own documents, vector indices, and knowledge bases.' },
-    { title: 'Agentic AI / Custom AI Agents', description: 'Multi-step autonomous AI agents that execute real actions, tool calls, and automated decisions.' },
-    { title: 'Workflow & Business Process Automation', description: 'Replacing manual, repetitive operations with reliable automated pipelines and SLA guarantees.' },
-    { title: 'Predictive Analytics & ML Models', description: 'Custom forecasting, scoring, and classification models trained on your proprietary data.' },
-    { title: 'AI-Powered Search & Recommendations', description: 'Semantic vector search and personalization engines that understand user intent.' },
-    { title: 'Model Fine-Tuning & Evaluation', description: 'Tailoring open-weight and proprietary models against real-world edge cases and evaluation benchmarks.' },
-    { title: 'MLOps & Model Deployment', description: 'Model versioning, latency monitoring, cost tracking, and automated CI/CD model rollouts.' },
+  const stageSoftwareDev = [
+    { title: 'Website Development Company', description: 'CMS, Shopify, WooCommerce, and B2B websites built to convert across desktop and mobile devices.', href: '/services/web-development' },
+    { title: 'Custom Web Design & Development', description: 'Custom website development, custom ecommerce, Magento builds, and bespoke digital experiences.', href: '/services/custom-web-design' },
+    { title: 'Custom Web Applications', description: 'High-performance React/Next.js platforms built for real-time responsiveness and scale.', href: '/services/custom-web-applications' },
+    { title: 'SaaS Application Development', description: 'End-to-end multi-tenant SaaS architecture, billing integration, and tenant isolation.', href: '/services/saas-application-development' },
+    { title: 'Mobile App Development', description: 'Cross-platform iOS and Android applications with native-level performance and fluid UX.', href: '/services/mobile-app-development' },
+    { title: 'Product Engineering & Architecture', description: 'Strategic technical architecture, domain-driven design, and scalable system blueprints.', href: '/services/product-engineering-architecture' },
+    { title: 'API Development & Integration', description: 'Type-safe GraphQL and REST APIs, gRPC microservices, and third-party webhook systems.', href: '/services/api-development-integration' },
+    { title: 'Legacy System Modernization', description: 'Refactoring monolithic systems into modern cloud-native architectures with zero downtime.', href: '/services/legacy-system-modernization' },
   ]
 
-  const stage3DigitalMarketing = [
-    { title: 'SEO & Technical SEO', description: 'Site architecture, Core Web Vitals optimization, programmatic SEO, and technical crawlability.' },
-    { title: 'Paid Media (PPC) Advertising', description: 'Google Ads, Meta, and LinkedIn campaigns managed strictly for efficient CAC and high ROAS.' },
-    { title: 'Social Media Strategy & Management', description: 'Consistent, technical on-brand presence across developer and executive social channels.' },
-    { title: 'Content Marketing & Copywriting', description: 'Technical whitepapers, developer documentation, and acquisition content built to convert.' },
-    { title: 'Email Marketing & Automation', description: 'Automated lifecycle onboarding campaigns and customer retention flows using Klaviyo and HubSpot.' },
-    { title: 'Conversion Rate Optimization (CRO)', description: 'Data-driven A/B testing, landing page optimization, and conversion funnel analysis.' },
-    { title: 'Analytics, Tracking & Reporting', description: 'Clean GA4 measurement, server-side tracking, and multi-touch attribution dashboards.' },
-    { title: 'Brand & Growth Strategy', description: 'Market positioning, go-to-market execution, and channel strategies tied to business goals.' },
+  const stageVirtualAssistants = [
+    { title: 'AI Virtual Assistant Services', description: 'Combining experienced human virtual assistants with AI technology to save time and boost productivity.', href: '/services/ai-virtual-assistant-services' },
+    { title: 'GoHighLevel Experts', description: 'Professional GoHighLevel expert services to manage, optimize, and maintain your CRM, workflows, and funnels.', href: '/gohighlevel-experts' },
+    { title: 'AI Agent Management & Deployment', description: 'Deploy, manage, monitor, and optimize your autonomous AI agents with continuous oversight.', href: '/ai-agent-management' },
+    { title: 'Lead Generation VA Services', description: 'Find new prospects, build verified contact lists, and schedule lead meetings to fill your sales pipeline.', href: '/lead-generation-services' },
+    { title: 'CRM & Automation VA Services', description: 'Organize customer data, build follow-up workflows, clean databases, and optimize CRM operations.', href: '/crm-automation-services' },
+    { title: 'Executive Assistants', description: 'Dedicated remote executive assistants for calendar, inbox, project management, and administrative support.', href: '/executive-assistants' },
+    { title: 'Legal Virtual Assistant Services', description: 'Client intake, court calendar tracking, legal document formatting, and administrative support for law firms.', href: '/legal-virtual-assistant-services' },
   ]
 
-  const stage4InfraDesign = [
-    { title: 'Cloud Infrastructure & DevOps', description: 'Multi-region AWS/GCP cloud infrastructure, Terraform IaC, and Kubernetes cluster management.' },
-    { title: 'CI/CD & Release Engineering', description: 'Automated build, test, and zero-downtime deployment pipelines with rollback safety.' },
-    { title: 'Product Design & UX Engineering', description: 'Interfaces that captivate and convert, motion design, and accessible component architectures.' },
-    { title: 'Design Systems & Component Libraries', description: 'Reusable Figma and React component design systems engineered to scale across products.' },
-    { title: 'Ongoing Support, Monitoring & Optimization', description: 'Sub-millisecond API tuning, security vulnerability patching, and 24/7 telemetry monitoring.' },
+  const stageDigitalMarketing = [
+    { title: 'AI-Powered SEO & Technical SEO', description: 'Generative AI visibility, technical site architecture, Core Web Vitals, and local search dominance.', href: '/services/seo' },
+    { title: 'Google Ads & PPC Management', description: 'Local Service Ads, B2B lead generation, white-label management, and international PPC campaigns.', href: '/services/google-ads' },
+    { title: 'Pay-Per-Click (PPC) Advertising', description: 'PPC consulting, full multi-channel campaign management, and geo-targeted local PPC.', href: '/services/ppc' },
+    { title: 'SEM (Search Engine Marketing)', description: 'Connected SEO, SEM, and PPC strategy operating under one unified roadmap.', href: '/services/sem' },
+    { title: 'YouTube Ads Agency', description: 'High-impact video ad creative, precise audience targeting, and international/French campaigns.', href: '/services/youtube-ads' },
+    { title: 'Bing Ads Agency', description: 'Bing Ads management, lower CPC pay-per-click, and Bing Shopping feed optimization.', href: '/services/bing-ads' },
+    { title: 'Social Media Marketing Agency', description: 'Social media strategy built for small business, enterprise, local, and financial services.', href: '/services/social-media-marketing' },
+    { title: 'TikTok Ads Agency', description: 'Native-feeling TikTok ad campaigns built for how people actually scroll, watch, and convert.', href: '/services/tiktok-ads' },
+    { title: 'LinkedIn Advertising Agency', description: 'B2B LinkedIn advertising focused on decision-maker targeting, pipeline impact, and cost-per-lead optimization.', href: '/services/linkedin-advertising' },
+    { title: 'Content Marketing & Copywriting', description: 'SEO content writing that speaks to human readers first, structured for high search visibility and lead conversions.', href: '/services/content-marketing-copywriting' },
+    { title: 'Email Marketing Agency', description: 'Full-service B2B, SaaS, and white label email marketing campaigns built for high open rates and revenue.', href: '/services/email-marketing' },
+    { title: 'Conversion Rate Optimization (CRO)', description: 'Data-driven A/B testing, landing page optimization, and conversion funnel analysis.', href: '/services/conversion-rate-optimization' },
+    { title: 'Analytics, Tracking & Reporting', description: 'Clean GA4 measurement, server-side tracking, and multi-touch attribution dashboards.', href: '/services/analytics-tracking-reporting' },
+    { title: 'Brand & Growth Strategy', description: 'Market positioning, go-to-market execution, and channel strategies tied to business goals.', href: '/services/brand-growth-strategy' },
   ]
 
   return (
@@ -86,14 +96,51 @@ export default function ServicesPage() {
           <PageHero
             eyebrow="full capability catalog"
             title="Services"
-            description="A comprehensive breakdown of our software engineering, AI intelligence, marketing growth, and cloud infrastructure capabilities."
+            description="A comprehensive breakdown of our AI intelligence, software engineering, virtual assistant operations, and digital growth capabilities."
           />
 
-          {/* Stage 1: Software Development */}
+          {/* Category 01: AI & Automation */}
+          <section className="py-12">
+            <ContentPanel className="max-w-5xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <SectionHeading
+                  eyebrow="Category 01"
+                  title={
+                    <>
+                      AI &amp; <span className="flux-word">Automation</span>
+                    </>
+                  }
+                  description="Agentic AI systems, RAG pipelines, and intelligent process automation."
+                />
+                <div className="flex flex-col gap-2 shrink-0 mb-2">
+                  <Link
+                    href="/services/ai-services"
+                    className="inline-flex items-center gap-2 font-mono text-xs text-[#4DE8DC] hover:underline"
+                  >
+                    See the full AI &amp; Automation breakdown →
+                  </Link>
+                  <Link
+                    href="/services/ai-virtual-assistant-services"
+                    className="inline-flex items-center gap-2 font-mono text-xs text-[#4DE8DC] hover:underline"
+                  >
+                    See AI Virtual Assistant Services →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
+                {stageAIAutomation.map((item) => (
+                  <ServiceListItem key={item.title} title={item.title} description={item.description} href={item.href} />
+                ))}
+              </div>
+            </ContentPanel>
+          </section>
+
+          {/* Category 02: Software Development */}
           <section className="py-12">
             <ContentPanel className="max-w-5xl mx-auto">
               <SectionHeading
-                eyebrow="Category 01"
+                eyebrow="Category 02"
                 title={
                   <>
                     Software <span className="flux-word">Development</span>
@@ -102,48 +149,40 @@ export default function ServicesPage() {
                 description="Full-stack product engineering and custom web platform builds."
               />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
-                {stage1SoftwareDev.map((item) => (
-                  <ServiceListItem key={item.title} title={item.title} description={item.description} />
+                {stageSoftwareDev.map((item) => (
+                  <ServiceListItem key={item.title} title={item.title} description={item.description} href={item.href} />
                 ))}
               </div>
             </ContentPanel>
           </section>
 
-          {/* Stage 2: AI & Automation */}
+          {/* Category 03: Virtual Assistant & Managed Services */}
           <section className="py-12">
             <ContentPanel className="max-w-5xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <SectionHeading
-                  eyebrow="Category 02"
-                  title={
-                    <>
-                      AI &amp; <span className="flux-word">Automation</span>
-                    </>
-                  }
-                  description="Agentic AI systems, RAG pipelines, and intelligent process automation."
-                />
-                <Link
-                  href="/services/ai-services"
-                  className="inline-flex items-center gap-2 font-mono text-xs text-[#4DE8DC] hover:underline shrink-0 mb-2"
-                >
-                  See the full AI &amp; Automation breakdown →
-                </Link>
-              </div>
+              <SectionHeading
+                eyebrow="Category 03"
+                title={
+                  <>
+                    Virtual Assistant &amp; <span className="flux-word">Managed Services</span>
+                  </>
+                }
+                description="Dedicated experts and specialized virtual assistant services to scale your operations."
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
-                {stage2AIAutomation.map((item) => (
-                  <ServiceListItem key={item.title} title={item.title} description={item.description} />
+                {stageVirtualAssistants.map((item) => (
+                  <ServiceListItem key={item.title} title={item.title} description={item.description} href={item.href} />
                 ))}
               </div>
             </ContentPanel>
           </section>
 
-          {/* Stage 3: Digital Marketing */}
+          {/* Category 04: Digital Marketing */}
           <section className="py-12">
             <ContentPanel className="max-w-5xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <SectionHeading
-                  eyebrow="Category 03"
+                  eyebrow="Category 04"
                   title={
                     <>
                       Digital <span className="flux-word">Marketing</span>
@@ -160,28 +199,8 @@ export default function ServicesPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
-                {stage3DigitalMarketing.map((item) => (
-                  <ServiceListItem key={item.title} title={item.title} description={item.description} />
-                ))}
-              </div>
-            </ContentPanel>
-          </section>
-
-          {/* Stage 4: Infrastructure & Design */}
-          <section className="py-12">
-            <ContentPanel className="max-w-5xl mx-auto">
-              <SectionHeading
-                eyebrow="Category 04"
-                title={
-                  <>
-                    Infrastructure &amp; <span className="flux-word">Design</span>
-                  </>
-                }
-                description="Cloud DevOps, CI/CD pipelines, design systems, and 24/7 telemetry monitoring."
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
-                {stage4InfraDesign.map((item) => (
-                  <ServiceListItem key={item.title} title={item.title} description={item.description} />
+                {stageDigitalMarketing.map((item) => (
+                  <ServiceListItem key={item.title} title={item.title} description={item.description} href={item.href} />
                 ))}
               </div>
             </ContentPanel>

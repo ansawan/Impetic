@@ -62,8 +62,8 @@ export function CameraRig({ keyframes = DEFAULT_KEYFRAMES, dwell = 0.05 }: Camer
     lookCurve.getPoint(eased, targetLook.current)
 
     // Subtle mouse parallax effect
-    const mouseX = state.pointer.x * 0.3
-    const mouseY = state.pointer.y * 0.3
+    const mouseX = state.pointer.x * 0.1
+    const mouseY = state.pointer.y * 0.1
 
     targetPos.current.x += mouseX
     targetPos.current.y += mouseY

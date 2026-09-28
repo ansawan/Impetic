@@ -4,7 +4,7 @@ import { TextScrim } from '@/components/overlays/TextScrim'
 
 interface PageHeroProps {
   eyebrow: string
-  title: string
+  title: string | React.ReactNode
   description: string
 }
 

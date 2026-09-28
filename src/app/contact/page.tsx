@@ -62,10 +62,10 @@ export default function ContactPage() {
                     <div>
                       <h3 className="text-sm font-bold text-white mb-1">Email Inquiry</h3>
                       <a
-                        href="mailto:info@codeflux.com"
+                        href="mailto:info@impetic.com"
                         className="font-mono text-sm text-[#4DE8DC] hover:underline"
                       >
-                        info@codeflux.com
+                        info@impetic.com
                       </a>
                     </div>
                   </div>

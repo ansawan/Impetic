@@ -26,10 +26,10 @@ export function CTAOverlay() {
             Start a Project
           </Link>
           <a
-            href="mailto:info@codeflux.com"
+            href="mailto:info@impetic.com"
             className="font-mono text-base text-[#EAF6F5] hover:text-[#4DE8DC] transition-colors underline underline-offset-8"
           >
-            info@codeflux.com
+            info@impetic.com
           </a>
         </div>
       </div>

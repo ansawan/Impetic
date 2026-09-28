@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { TextScrim } from './TextScrim'
+import { ImpeticLogo } from '@/components/3d/ImpeticLogo'
 
 export function HeroOverlay() {
   return (
@@ -22,20 +23,20 @@ export function HeroOverlay() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="hero-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight mb-6"
+          className="hero-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight mb-6 flex items-center justify-center gap-4 sm:gap-6 flex-wrap"
           style={{ letterSpacing: '-0.02em' }}
         >
-          <span className="text-[#EAF6F5]">CODE</span>{' '}
-          <span className="flux-word">FLUX</span>
+          <ImpeticLogo className="w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28" />
+          <span className="flux-word">IMPETIC</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-xl mx-auto text-lg sm:text-xl text-white font-normal mb-10 leading-relaxed"
+          className="max-w-2xl mx-auto text-lg sm:text-xl text-white font-normal mb-10 leading-relaxed"
         >
-          Engineering the continuous data-current that propels modern products forward. Intelligent AI, web architectures, and cloud platforms.
+          Empowering modern businesses through strategic Digital Marketing, AI-driven Automation, and Scalable Software Solutions.
         </motion.p>
 
         <motion.div
@@ -45,10 +46,10 @@ export function HeroOverlay() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="#cta"
-            className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm hover:shadow-[0_0_30px_rgba(77,232,220,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
+            href="/contact"
+            className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-extrabold text-sm uppercase tracking-wider hover:shadow-[0_0_30px_rgba(77,232,220,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
           >
-            Start a Project
+            GET A QUOTE
           </a>
           <a
             href="#showcase"
@@ -66,7 +67,7 @@ export function HeroOverlay() {
         transition={{ duration: 1, delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-xs text-[#47585A] uppercase tracking-widest">Scroll to explore</span>
+        <span className="font-mono text-xs text-white uppercase tracking-widest">Scroll to explore</span>
         <div className="w-5 h-9 rounded-full border-2 border-white/20 flex justify-center pt-2">
           <div className="w-1.5 h-1.5 rounded-full bg-[#4DE8DC] animate-bounce" />
         </div>

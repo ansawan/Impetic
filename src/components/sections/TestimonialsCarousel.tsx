@@ -4,7 +4,7 @@ import { ContentPanel } from '@/components/ui/ContentPanel'
 
 const TESTIMONIALS = [
   {
-    quote: "Code Flux rebuilt our entire lead pipeline in six weeks. Response time dropped 40% in the first month.",
+    quote: "Impetic rebuilt our entire lead pipeline in six weeks. Response time dropped 40% in the first month.",
     name: 'Sarah Chen',
     role: 'VP of Growth, Nova CRM',
   },
@@ -14,7 +14,7 @@ const TESTIMONIALS = [
     role: 'CTO, FluxPay',
   },
   {
-    quote: "Our marketing and product teams finally speak the same language, because Code Flux built both.",
+    quote: "Our marketing and product teams finally speak the same language, because Impetic built both.",
     name: 'Amara Odeh',
     role: 'Head of Marketing, Anchor Logistics',
   },

@@ -22,8 +22,8 @@ export function ContactForm() {
       `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || 'N/A'}\nBudget: ${formData.budget}\n\nProject Details:\n${formData.message}`
     )
 
-    // Trigger mailto directly to info@codeflux.com
-    window.location.href = `mailto:info@codeflux.com?subject=${subject}&body=${body}`
+    // Trigger mailto directly to info@impetic.com
+    window.location.href = `mailto:info@impetic.com?subject=${subject}&body=${body}`
 
     setSubmitted(true)
   }

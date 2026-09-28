@@ -136,7 +136,7 @@ export default function DigitalMarketingPage() {
           <section className="py-6 max-w-3xl mx-auto">
             <ContentPanel className="text-center">
               <p className="text-base sm:text-lg text-white leading-relaxed">
-                Marketing and engineering are usually run as separate teams speaking separate languages; Code Flux runs both under one roof, so campaigns are backed by real tracking infrastructure and conversion-optimized builds, not disconnected from the product itself.
+                Marketing and engineering are usually run as separate teams speaking separate languages; Impetic runs both under one roof, so campaigns are backed by real tracking infrastructure and conversion-optimized builds, not disconnected from the product itself.
               </p>
             </ContentPanel>
           </section>

@@ -136,7 +136,7 @@ export default function AIServicesPage() {
           <section className="py-6 max-w-3xl mx-auto">
             <ContentPanel className="text-center">
               <p className="text-base sm:text-lg text-white leading-relaxed">
-                Most &ldquo;AI features&rdquo; are surface-level; Code Flux builds AI as core infrastructure — retrieval, memory, evaluation, and guardrails included from day one, not bolted on after launch.
+                Most &ldquo;AI features&rdquo; are surface-level; Impetic builds AI as core infrastructure — retrieval, memory, evaluation, and guardrails included from day one, not bolted on after launch.
               </p>
             </ContentPanel>
           </section>

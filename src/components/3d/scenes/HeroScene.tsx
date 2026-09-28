@@ -15,7 +15,7 @@ export function HeroScene() {
   const sphereRef = useRef<THREE.Mesh>(null)
   const groupRef = useRef<THREE.Group>(null)
 
-  const particleCount = 6500
+  const particleCount = 2400
   const { positions, colors } = useMemo(() => {
     const pos = new Float32Array(particleCount * 3)
     const col = new Float32Array(particleCount * 3)
@@ -54,13 +54,13 @@ export function HeroScene() {
 
     // Motion dampening when centered/being read
     const settled = localP < 0.15
-    const rotSpeed = settled ? 0.05 : 0.15
+    const rotSpeed = settled ? 0.015 : 0.04
 
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * rotSpeed
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.1
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.04
       
-      const opacity = 1 - Math.pow(localP, 2)
+      const opacity = (1 - Math.pow(localP, 2)) * 0.65
       groupRef.current.scale.setScalar(Math.max(0.001, 1 - localP * 0.5))
       
       if (pointsRef.current) {
@@ -69,8 +69,8 @@ export function HeroScene() {
     }
 
     if (sphereRef.current) {
-      sphereRef.current.rotation.y -= delta * rotSpeed * 1.5
-      sphereRef.current.rotation.z += delta * rotSpeed
+      sphereRef.current.rotation.y -= delta * rotSpeed * 1.2
+      sphereRef.current.rotation.z += delta * rotSpeed * 0.8
     }
   })
 
@@ -89,10 +89,10 @@ export function HeroScene() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.045}
+          size={0.032}
           vertexColors
           transparent
-          opacity={1}
+          opacity={0.65}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -105,14 +105,14 @@ export function HeroScene() {
           color="#4DE8DC"
           wireframe
           transparent
-          opacity={0.35}
+          opacity={0.15}
         />
       </mesh>
 
       {/* Secondary Accent Ring */}
       <mesh rotation={[Math.PI / 3, 0, 0]}>
         <torusGeometry args={[2.5, 0.015, 16, 64]} />
-        <meshBasicMaterial color="#1D6E68" transparent opacity={0.6} />
+        <meshBasicMaterial color="#1D6E68" transparent opacity={0.2} />
       </mesh>
     </group>
   )
