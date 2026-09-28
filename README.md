@@ -40,3 +40,20 @@ The static site is exported to `out/`. Upload its contents (including `.htaccess
 ## License
 
 © 2026 Impetic. All rights reserved.
+
+### Automatic deploy to Hostinger
+
+Every push to `main` builds the site and uploads `out/` to Hostinger via FTP (`.github/workflows/deploy-hostinger.yml`).
+Add these in GitHub → Settings → Secrets and variables → Actions:
+
+| Secret | Value |
+| --- | --- |
+| `FTP_SERVER` | Hostinger FTP host (hPanel → Files → FTP Accounts) |
+| `FTP_USERNAME` | FTP username |
+| `FTP_PASSWORD` | FTP password |
+| `FTP_SERVER_DIR` | Optional, defaults to `public_html/` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/publishable key |
+| `NEXT_PUBLIC_SITE_URL` | Optional, e.g. `https://impetic.com` |
+
+Until `FTP_SERVER` is set the workflow only builds; it does not deploy.
