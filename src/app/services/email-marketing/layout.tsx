@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/email-marketing/' },
   title: 'Email Marketing Agency | Full-Service, B2B & White Label — Impetic',
   description:
     'Impetic is a full-service email marketing agency that builds campaigns people actually open. B2B, SaaS, white label, and targeted email done right.',

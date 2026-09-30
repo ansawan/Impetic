@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/ppc/' },
   title: 'Pay-Per-Click Advertising Services | Top PPC Agency — Impetic',
   description:
     "Impetic is a pay-per-click advertising company that treats your budget like it's ours. Local or national, we build PPC campaigns that actually convert.",

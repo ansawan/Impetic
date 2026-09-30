@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/linkedin-advertising/' },
   title: 'LinkedIn Advertising Agency & Cost Guide | Impetic',
   description:
     'Impetic runs LinkedIn ad campaigns built for B2B results, not just impressions. Straight answers on LinkedIn advertising cost, CPC, and what actually works.',

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/sem/' },
   title: 'SEM Marketing Services | SEO, SEM & PPC Under One Roof — Impetic',
   description:
     'Impetic runs SEO, SEM, and PPC as one connected strategy — not three separate invoices. See how full-funnel search marketing actually grows your business.',

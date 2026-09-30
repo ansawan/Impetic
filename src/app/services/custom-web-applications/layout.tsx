@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/custom-web-applications/' },
   title: 'Custom Web Application Development Services | Impetic',
   description: 'High-performance React/Next.js web application development built for speed, real-time responsiveness, and scale.',
 }

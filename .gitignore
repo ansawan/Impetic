@@ -48,3 +48,5 @@ next-env.d.ts
 # local scratch files
 /scratch/
 scratch-test.mjs
+
+/hostinger-upload/

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/rag-retrieval-augmented-generation/' },
   title: 'Retrieval-Augmented Generation (RAG) Services | Impetic',
   description: 'Production vector search, document embedding pipelines, and RAG architectures grounding AI outputs in your data.',
 }

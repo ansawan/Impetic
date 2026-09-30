@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/custom-web-design/' },
   title: 'Custom Web Design & Development Services | Impetic',
   description:
     'Impetic builds custom websites and ecommerce stores — including Magento — designed around your business, not a recycled template. Affordable custom design done right.',

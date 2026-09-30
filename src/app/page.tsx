@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { HeroOverlay } from '@/components/overlays/HeroOverlay'
 import { LogoMarquee } from '@/components/sections/LogoMarquee'
 import { AboutTeaserOverlay } from '@/components/overlays/AboutTeaserOverlay'
@@ -9,6 +10,10 @@ import { ShowcaseOverlay } from '@/components/overlays/ShowcaseOverlay'
 import { TestimonialsOverlay } from '@/components/overlays/TestimonialsOverlay'
 import { StatsOverlay } from '@/components/overlays/StatsOverlay'
 import { CTAOverlay } from '@/components/overlays/CTAOverlay'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default function Home() {
   return (

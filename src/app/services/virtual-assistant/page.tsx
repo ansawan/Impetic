@@ -1,1 +1,5 @@
-export { default } from '../../virtual-assistant/page'
+import { permanentRedirect } from 'next/navigation'
+
+export default function RedirectPage() {
+  permanentRedirect('/virtual-assistant')
+}

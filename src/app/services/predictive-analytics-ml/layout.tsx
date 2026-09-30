@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/predictive-analytics-ml/' },
   title: 'Predictive Analytics & ML Models Services | Impetic',
   description: 'Custom forecasting, churn scoring, and predictive machine learning models trained on proprietary data.',
 }

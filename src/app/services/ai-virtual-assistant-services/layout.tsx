@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/ai-virtual-assistant-services/' },
   title: 'AI Virtual Assistant Services — Work Smarter, Not Harder | Impetic',
   description: 'Professional AI Virtual Assistant Services combining experienced human virtual assistants with AI technology to save time, boost productivity, and grow your business.',
   openGraph: {

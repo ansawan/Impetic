@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/executive-assistants/' },
   title: 'Executive Assistant Services — Strategic Delegation | Impetic',
   description:
     'Dedicated remote Executive Assistant services for founders, CEOs, and business leaders. Calendar management, inbox organization, travel planning, and administrative support.',

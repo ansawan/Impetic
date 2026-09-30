@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/lead-generation-services/' },
   title: 'Lead Generation Virtual Assistant Services | Impetic',
   description:
     'Dedicated B2B lead generation virtual assistants for prospect research, list building, CRM management, appointment setting, and cold outreach.',

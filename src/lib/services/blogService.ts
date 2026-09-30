@@ -191,6 +191,13 @@ export const blogService = {
     return { blogs: filtered, total: filtered.length };
   },
 
+  // Blogs that get a static page at build time (and so belong in the sitemap).
+  // Falls back to the built-in articles when the database has no published posts.
+  async getStaticBlogs(): Promise<Blog[]> {
+    const { blogs } = await this.getPublishedBlogs({ limit: 500 });
+    return blogs.length > 0 ? blogs : MOCK_BLOGS.filter(b => b.status === 'published');
+  },
+
   // Get single blog by slug
   async getBlogBySlug(slug: string): Promise<Blog | null> {
     if (isSupabaseConfigured()) {

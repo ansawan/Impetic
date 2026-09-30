@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/tiktok-ads/' },
   title: 'TikTok Advertising Agency & Cost Guide | Impetic',
   description:
     'Impetic runs TikTok ad campaigns built for how people actually watch — not skip. Straight answers on TikTok advertising cost, and a strategy to match.',

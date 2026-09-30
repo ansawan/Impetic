@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/gohighlevel-experts/' },
   title: 'GoHighLevel Experts — Setup, Automation & Funnel Services | Impetic',
   description:
     'Professional GoHighLevel expert services to manage, optimize, and maintain your GoHighLevel account. CRM management, automations, sales funnels, and onboarding support.',

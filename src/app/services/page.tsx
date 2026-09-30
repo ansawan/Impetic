@@ -57,12 +57,12 @@ export default function ServicesPage() {
 
   const stageVirtualAssistants = [
     { title: 'AI Virtual Assistant Services', description: 'Combining experienced human virtual assistants with AI technology to save time and boost productivity.', href: '/services/ai-virtual-assistant-services' },
-    { title: 'GoHighLevel Experts', description: 'Professional GoHighLevel expert services to manage, optimize, and maintain your CRM, workflows, and funnels.', href: '/gohighlevel-experts' },
-    { title: 'AI Agent Management & Deployment', description: 'Deploy, manage, monitor, and optimize your autonomous AI agents with continuous oversight.', href: '/ai-agent-management' },
-    { title: 'Lead Generation VA Services', description: 'Find new prospects, build verified contact lists, and schedule lead meetings to fill your sales pipeline.', href: '/lead-generation-services' },
-    { title: 'CRM & Automation VA Services', description: 'Organize customer data, build follow-up workflows, clean databases, and optimize CRM operations.', href: '/crm-automation-services' },
-    { title: 'Executive Assistants', description: 'Dedicated remote executive assistants for calendar, inbox, project management, and administrative support.', href: '/executive-assistants' },
-    { title: 'Legal Virtual Assistant Services', description: 'Client intake, court calendar tracking, legal document formatting, and administrative support for law firms.', href: '/legal-virtual-assistant-services' },
+    { title: 'GoHighLevel Experts', description: 'Professional GoHighLevel expert services to manage, optimize, and maintain your CRM, workflows, and funnels.', href: '/services/gohighlevel-experts' },
+    { title: 'AI Agent Management & Deployment', description: 'Deploy, manage, monitor, and optimize your autonomous AI agents with continuous oversight.', href: '/services/ai-agent-management' },
+    { title: 'Lead Generation VA Services', description: 'Find new prospects, build verified contact lists, and schedule lead meetings to fill your sales pipeline.', href: '/services/lead-generation-services' },
+    { title: 'CRM & Automation VA Services', description: 'Organize customer data, build follow-up workflows, clean databases, and optimize CRM operations.', href: '/services/crm-automation-services' },
+    { title: 'Executive Assistants', description: 'Dedicated remote executive assistants for calendar, inbox, project management, and administrative support.', href: '/services/executive-assistants' },
+    { title: 'Legal Virtual Assistant Services', description: 'Client intake, court calendar tracking, legal document formatting, and administrative support for law firms.', href: '/services/legal-virtual-assistant-services' },
   ]
 
   const stageDigitalMarketing = [

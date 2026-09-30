@@ -1,12 +1,11 @@
 import { MetadataRoute } from 'next';
 import { blogService } from '@/lib/services/blogService';
+import { absoluteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://impetic.com';
-
-  // Base static canonical routes
+  // Base static canonical routes (absoluteUrl adds the trailing slash the host serves with a 200)
   const routes = [
     '',
     '/about',
@@ -65,19 +64,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services/api-development-integration',
     '/services/legacy-system-modernization',
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: absoluteUrl(route),
     lastModified: new Date().toISOString(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : 0.8,
   }));
 
-  // Fetch published blog posts for sitemap (excluding any marked noindex)
+  // Blog posts that are statically built (excluding any marked noindex)
   try {
-    const { blogs } = await blogService.getPublishedBlogs({ limit: 500 });
+    const blogs = await blogService.getStaticBlogs();
     const indexableBlogs = blogs.filter((blog) => !blog.seo?.noindex);
 
     const blogRoutes = indexableBlogs.map((blog) => ({
-      url: `${baseUrl}/blog/${blog.slug}`,
+      url: absoluteUrl(`/blog/${blog.slug}`),
       lastModified: blog.updated_at || blog.published_at || new Date().toISOString(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/legacy-system-modernization/' },
   title: 'Legacy System Modernization Services | Impetic',
   description: 'Refactoring monolithic systems into modern cloud-native architectures with zero downtime.',
 }

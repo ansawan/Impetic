@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/ai-search-recommendations/' },
   title: 'AI-Powered Search & Recommendations Services | Impetic',
   description: 'Semantic vector search, product recommendation engines, and real-time embedding re-ranking.',
 }

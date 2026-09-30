@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/product-engineering-architecture/' },
   title: 'Product Engineering & Architecture Services | Impetic',
   description: 'Strategic technical architecture, domain-driven design, and scalable system blueprints for software products.',
 }

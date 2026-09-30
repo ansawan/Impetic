@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/ai-agent-management/' },
   title: 'AI Agent Management & Deployment Services | Impetic',
   description:
     'Deploy, manage, monitor, and optimize your autonomous AI agents with professional oversight. Ensure high accuracy, continuous integration, and long-term performance.',

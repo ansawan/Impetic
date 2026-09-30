@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/legal-virtual-assistant-services/' },
   title: 'Legal Virtual Assistant Services — Law Firm Administrative Support | Impetic',
   description:
     'Dedicated Legal Virtual Assistant Services for law firms, solo attorneys, and legal departments. Client intake, calendar management, legal document formatting, and case file organization.',

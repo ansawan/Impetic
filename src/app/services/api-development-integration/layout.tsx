@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/api-development-integration/' },
   title: 'API Development & Integration Services | Impetic',
   description: 'Type-safe GraphQL and REST APIs, gRPC microservices, and third-party webhook integration systems.',
 }

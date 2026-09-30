@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/content-marketing-copywriting/' },
   title: 'SEO Content Writing Services & Agency | Impetic',
   description:
     'Impetic is an SEO content writing company that writes for people first, search engines second — and still ranks. Content built to convert, not just fill a word count.',

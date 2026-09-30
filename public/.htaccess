@@ -1,25 +1,85 @@
+# Impetic — Hostinger (Apache) config for the static Next.js export.
+# Every public page lives at a URL ending in "/" (next.config: trailingSlash: true).
+
+# Real 404 status for missing pages (not a 200 "soft 404")
+ErrorDocument 404 /404.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # HTTPS Redirect (Optional for SSL)
+  # 1. Canonical host: www -> non-www, http -> https (single 301 hop)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
   RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # If requested file or directory exists, serve directly
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+  # 2. Legacy / renamed service URLs -> final page (permanent, no chains)
+  RewriteRule ^ai-agent-management/?$ https://%{HTTP_HOST}/services/ai-agent-management/ [R=301,L]
+  RewriteRule ^ai-search-recommendations/?$ https://%{HTTP_HOST}/services/ai-search-recommendations/ [R=301,L]
+  RewriteRule ^ai-virtual-assistant-services/?$ https://%{HTTP_HOST}/services/ai-virtual-assistant-services/ [R=301,L]
+  RewriteRule ^analytics-tracking-reporting/?$ https://%{HTTP_HOST}/services/analytics-tracking-reporting/ [R=301,L]
+  RewriteRule ^api-development-integration/?$ https://%{HTTP_HOST}/services/api-development-integration/ [R=301,L]
+  RewriteRule ^brand-growth-strategy/?$ https://%{HTTP_HOST}/services/brand-growth-strategy/ [R=301,L]
+  RewriteRule ^client-onboarding-services/?$ https://%{HTTP_HOST}/services/client-onboarding-services/ [R=301,L]
+  RewriteRule ^content-marketing/?$ https://%{HTTP_HOST}/services/content-marketing-copywriting/ [R=301,L]
+  RewriteRule ^conversion-rate-optimization/?$ https://%{HTTP_HOST}/services/conversion-rate-optimization/ [R=301,L]
+  RewriteRule ^crm-automation-services/?$ https://%{HTTP_HOST}/services/crm-automation-services/ [R=301,L]
+  RewriteRule ^custom-ai-agents/?$ https://%{HTTP_HOST}/services/custom-ai-agents/ [R=301,L]
+  RewriteRule ^custom-web-applications/?$ https://%{HTTP_HOST}/services/custom-web-applications/ [R=301,L]
+  RewriteRule ^email-marketing-automation/?$ https://%{HTTP_HOST}/services/email-marketing/ [R=301,L]
+  RewriteRule ^executive-assistants/?$ https://%{HTTP_HOST}/services/executive-assistants/ [R=301,L]
+  RewriteRule ^gohighlevel-experts/?$ https://%{HTTP_HOST}/services/gohighlevel-experts/ [R=301,L]
+  RewriteRule ^home-service-virtual-assistant/?$ https://%{HTTP_HOST}/services/home-service-virtual-assistant/ [R=301,L]
+  RewriteRule ^lead-generation-services/?$ https://%{HTTP_HOST}/services/lead-generation-services/ [R=301,L]
+  RewriteRule ^legacy-system-modernization/?$ https://%{HTTP_HOST}/services/legacy-system-modernization/ [R=301,L]
+  RewriteRule ^legal-virtual-assistant/?$ https://%{HTTP_HOST}/services/legal-virtual-assistant-services/ [R=301,L]
+  RewriteRule ^legal-virtual-assistant-services/?$ https://%{HTTP_HOST}/services/legal-virtual-assistant-services/ [R=301,L]
+  RewriteRule ^llm-chatbot-integration/?$ https://%{HTTP_HOST}/services/llm-chatbot-integration/ [R=301,L]
+  RewriteRule ^marketing-operations-services/?$ https://%{HTTP_HOST}/services/marketing-operations-services/ [R=301,L]
+  RewriteRule ^mlops-model-deployment/?$ https://%{HTTP_HOST}/services/mlops-model-deployment/ [R=301,L]
+  RewriteRule ^mobile-app-development/?$ https://%{HTTP_HOST}/services/mobile-app-development/ [R=301,L]
+  RewriteRule ^model-fine-tuning-evaluation/?$ https://%{HTTP_HOST}/services/model-fine-tuning-evaluation/ [R=301,L]
+  RewriteRule ^paid-media-ppc/?$ https://%{HTTP_HOST}/services/google-ads/ [R=301,L]
+  RewriteRule ^predictive-analytics-ml/?$ https://%{HTTP_HOST}/services/predictive-analytics-ml/ [R=301,L]
+  RewriteRule ^product-engineering-architecture/?$ https://%{HTTP_HOST}/services/product-engineering-architecture/ [R=301,L]
+  RewriteRule ^property-management-virtual-assistant/?$ https://%{HTTP_HOST}/services/property-management-virtual-assistant/ [R=301,L]
+  RewriteRule ^rag-retrieval-augmented-generation/?$ https://%{HTTP_HOST}/services/rag-retrieval-augmented-generation/ [R=301,L]
+  RewriteRule ^real-estate-virtual-assistant/?$ https://%{HTTP_HOST}/services/real-estate-virtual-assistant/ [R=301,L]
+  RewriteRule ^saas-application-development/?$ https://%{HTTP_HOST}/services/saas-application-development/ [R=301,L]
+  RewriteRule ^seo-technical-seo/?$ https://%{HTTP_HOST}/services/seo/ [R=301,L]
+  RewriteRule ^services/content-marketing/?$ https://%{HTTP_HOST}/services/content-marketing-copywriting/ [R=301,L]
+  RewriteRule ^services/email-marketing-automation/?$ https://%{HTTP_HOST}/services/email-marketing/ [R=301,L]
+  RewriteRule ^services/paid-media-ppc/?$ https://%{HTTP_HOST}/services/google-ads/ [R=301,L]
+  RewriteRule ^services/seo-technical-seo/?$ https://%{HTTP_HOST}/services/seo/ [R=301,L]
+  RewriteRule ^services/social-media-management/?$ https://%{HTTP_HOST}/services/social-media-marketing/ [R=301,L]
+  RewriteRule ^services/virtual-assistant/?$ https://%{HTTP_HOST}/virtual-assistant/ [R=301,L]
+  RewriteRule ^social-media-management/?$ https://%{HTTP_HOST}/services/social-media-marketing/ [R=301,L]
+  RewriteRule ^virtual-assistant-marketing-agencies/?$ https://%{HTTP_HOST}/services/virtual-assistant-marketing-agencies/ [R=301,L]
+  RewriteRule ^workflow-process-automation/?$ https://%{HTTP_HOST}/services/workflow-process-automation/ [R=301,L]
 
-  # Resolve subfolder index.html (e.g. /admin/login -> /admin/login/index.html)
-  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
-  RewriteRule ^(.*)$ $1/index.html [L]
+  # Removed page
+  RewriteRule ^pricing/?$ https://%{HTTP_HOST}/contact/ [R=301,L]
 
-  # Resolve .html extension (e.g. /admin/login -> /admin/login.html)
-  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^(.*)$ $1.html [L]
+  # 3. Add the trailing slash to page URLs (/about -> /about/)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI}/ [R=301,L]
 
-  # 404 Fallback to index.html or 404.html
-  RewriteCond %{DOCUMENT_ROOT}/404.html -f
-  RewriteRule ^ 404.html [L]
+  # 4. Existing files and folders are served as-is; anything else falls
+  #    through to ErrorDocument 404 above.
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Next.js RSC payload files are for the browser only — keep them out of search results
+  <FilesMatch "^(?!robots\.txt$).+\.txt$">
+    Header set X-Robots-Tag "noindex"
+  </FilesMatch>
+
+  # JS/CSS/fonts are content-hashed by Next.js — cache them for a year
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
 </IfModule>

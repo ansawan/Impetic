@@ -7,20 +7,14 @@ import { PageHero } from '@/components/layout/PageHero'
 import { ContentPanel } from '@/components/ui/ContentPanel'
 import { blogService } from '@/lib/services/blogService'
 import { seoService } from '@/lib/services/seoService'
+import { absoluteUrl } from '@/lib/site'
 
 interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  const { blogs } = await blogService.getPublishedBlogs({ limit: 100 });
-  if (blogs.length === 0) {
-    return [
-      { slug: 'building-production-grade-ai-agents' },
-      { slug: 'optimizing-3d-webgl-interfaces' },
-      { slug: 'technical-seo-strategies-nextjs' },
-    ];
-  }
+  const blogs = await blogService.getStaticBlogs();
   return blogs.map((blog) => ({
     slug: blog.slug,
   }));
@@ -36,8 +30,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://impetic.com';
-  const canonicalUrl = blog.seo?.canonical_url || `${siteUrl}/blog/${blog.slug}`;
+  const canonicalUrl = blog.seo?.canonical_url || absoluteUrl(`/blog/${blog.slug}`);
   const seoTitle = blog.seo?.seo_title || blog.seo_title || blog.title;
   const seoDesc = blog.seo?.meta_description || blog.seo_description || blog.excerpt;
   const ogTitle = blog.seo?.og_title || seoTitle;
@@ -192,7 +185,7 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
                   Twitter / X
                 </a>
                 <a
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://impetic.com/blog/${blog.slug}`)}`}
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl(`/blog/${blog.slug}`))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-xl bg-white/[0.04] border border-white/10 text-white hover:text-[#4DE8DC] hover:border-[#4DE8DC]/40 transition-colors"

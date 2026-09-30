@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/services/web-development/' },
   title: 'Website Development Company | CMS, Shopify & WooCommerce — Impetic',
   description:
     'Impetic builds fast, responsive websites on the platform that actually fits your business — CMS, Shopify, or WooCommerce. Built to convert, not just look nice.',
