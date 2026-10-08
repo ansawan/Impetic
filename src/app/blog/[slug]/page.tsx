@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
   const twitterCard = blog.seo?.twitter_card_type || 'summary_large_image';
 
   return {
-    title: `${seoTitle} | Impetic Insights`,
+    title: /impetic/i.test(seoTitle) ? seoTitle : `${seoTitle} | Impetic Insights`,
     description: seoDesc,
     alternates: {
       canonical: canonicalUrl,

@@ -46,7 +46,7 @@ export function HeroOverlay() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="/contact"
+            href="/contact/"
             className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-extrabold text-sm uppercase tracking-wider hover:shadow-[0_0_30px_rgba(77,232,220,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
           >
             GET A QUOTE
