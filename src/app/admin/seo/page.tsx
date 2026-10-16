@@ -5,8 +5,6 @@ import {
   Sparkles,
   Save,
   Globe,
-  PlusCircle,
-  Trash2,
   ShieldAlert,
   Search,
   ArrowRight,
@@ -48,9 +46,6 @@ export default function AdminSeoSettingsPage() {
 
   // State for Redirect Rules
   const [redirects, setRedirects] = useState<RedirectRule[]>([])
-  const [newOldPath, setNewOldPath] = useState('')
-  const [newNewPath, setNewNewPath] = useState('')
-  const [newRedirectType, setNewRedirectType] = useState<301 | 302>(301)
 
   useEffect(() => {
     async function loadData() {
@@ -124,37 +119,6 @@ export default function AdminSeoSettingsPage() {
       alert('Failed saving SEO settings')
     } finally {
       setSaving(false)
-    }
-  }
-
-  const handleAddRedirect = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newOldPath || !newNewPath) {
-      alert('Please enter both Old Path and New Path')
-      return
-    }
-
-    const cleanOld = newOldPath.startsWith('/') ? newOldPath : `/${newOldPath}`
-    const cleanNew = newNewPath.startsWith('/') || newNewPath.startsWith('http') ? newNewPath : `/${newNewPath}`
-
-    try {
-      const added = await seoService.addRedirect({
-        old_path: cleanOld,
-        new_path: cleanNew,
-        redirect_type: newRedirectType,
-      })
-      setRedirects([added, ...redirects])
-      setNewOldPath('')
-      setNewNewPath('')
-    } catch (err) {
-      alert('Failed adding redirect')
-    }
-  }
-
-  const handleDeleteRedirect = async (id: string) => {
-    if (confirm('Delete this redirect rule?')) {
-      await seoService.deleteRedirect(id)
-      setRedirects(redirects.filter((r) => r.id !== id))
     }
   }
 
@@ -495,66 +459,27 @@ export default function AdminSeoSettingsPage() {
       {/* TAB 5: 301 REDIRECTS MANAGEMENT */}
       {activeTab === 'redirects' && (
         <div className="space-y-8">
-          {/* Add New Redirect Rule Form */}
-          <form onSubmit={handleAddRedirect} className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
-            <div className="font-mono text-xs text-[#4DE8DC] uppercase tracking-wider flex items-center gap-2">
-              <PlusCircle className="w-4 h-4" /> Add New 301 / 302 Redirect Rule
+          {/* Redirects are served by the host, not stored in the database */}
+          <div className="p-6 rounded-3xl bg-[#4DE8DC]/[0.04] border border-[#4DE8DC]/20 space-y-2 font-mono text-xs text-white/70 leading-relaxed">
+            <div className="text-[#4DE8DC] uppercase tracking-wider flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4" /> Live server redirects (read-only)
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div className="space-y-2">
-                <label className="block font-mono text-xs text-white/70">Old Path (From)</label>
-                <input
-                  type="text"
-                  value={newOldPath}
-                  onChange={(e) => setNewOldPath(e.target.value)}
-                  placeholder="/old-service-page"
-                  className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 font-mono text-xs text-white focus:outline-none focus:border-[#4DE8DC]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block font-mono text-xs text-white/70">New Path (To)</label>
-                <input
-                  type="text"
-                  value={newNewPath}
-                  onChange={(e) => setNewNewPath(e.target.value)}
-                  placeholder="/services/ai-virtual-assistant-services"
-                  className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 font-mono text-xs text-white focus:outline-none focus:border-[#4DE8DC]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block font-mono text-xs text-white/70">Redirect Code</label>
-                <div className="flex gap-2">
-                  <select
-                    value={newRedirectType}
-                    onChange={(e) => setNewRedirectType(Number(e.target.value) as 301 | 302)}
-                    className="grow px-4 py-3 rounded-xl bg-[#0D1417] border border-white/10 text-xs text-white focus:outline-none focus:border-[#4DE8DC]"
-                  >
-                    <option value={301}>301 Permanent</option>
-                    <option value={302}>302 Temporary</option>
-                  </select>
-                  <button
-                    type="submit"
-                    className="px-5 py-3 rounded-xl bg-[#4DE8DC] text-black font-bold text-xs uppercase tracking-wider hover:bg-[#4DE8DC]/90 transition-all shrink-0"
-                  >
-                    Add Rule
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
+            <p>
+              The site is a static export hosted on Hostinger, so redirects are applied by <span className="text-white">public/.htaccess</span>,
+              not by this panel or Supabase. This list mirrors those rules exactly. To add or change a redirect, edit
+              <span className="text-white"> public/.htaccess</span> and <span className="text-white">src/lib/redirects.ts</span>, then rebuild and redeploy.
+            </p>
+          </div>
 
           {/* Active Redirect Rules Table */}
           <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
             <h4 className="font-mono text-xs text-[#4DE8DC] uppercase tracking-wider">
-              Active Redirect Rules ({redirects.length})
+              Active 301 Redirects on impetic.com ({redirects.length})
             </h4>
 
             {redirects.length === 0 ? (
               <div className="py-8 text-center font-mono text-xs text-white/40">
-                No custom redirect rules created yet.
+                No redirects configured.
               </div>
             ) : (
               <div className="divide-y divide-white/5 overflow-x-auto">
@@ -569,14 +494,6 @@ export default function AdminSeoSettingsPage() {
                       <span className="text-[#4DE8DC] truncate">{r.new_path}</span>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteRedirect(r.id)}
-                      className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors shrink-0"
-                      title="Delete Redirect Rule"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
                   </div>
                 ))}
               </div>

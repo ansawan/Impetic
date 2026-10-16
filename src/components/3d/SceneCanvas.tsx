@@ -1,8 +1,10 @@
 'use client'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
+import { PerformanceMonitor } from '@react-three/drei'
 import { EffectComposer, Bloom, ChromaticAberration, DepthOfField, Vignette } from '@react-three/postprocessing'
 import { Vector2 } from 'three'
+import { prefersLightProfile } from './performanceProfile'
 
 import { CameraRig } from './CameraRig'
 import { HeroScene } from './scenes/HeroScene'
@@ -15,13 +17,18 @@ import { GlassClusterScene } from './scenes/GlassClusterScene'
 import { ParticleFieldScene } from './scenes/ParticleFieldScene'
 
 export default function SceneCanvas() {
+  const [light, setLight] = useState(prefersLightProfile)
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none w-full h-full bg-[#000000]">
+      {/* EffectComposer does its own anti-aliasing, so MSAA on the default buffer is wasted work */}
       <Canvas
         camera={{ position: [0, 0, 8.5], fov: 45 }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 1.5]}
+        gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
+        dpr={light ? 1 : [1, 1.5]}
       >
+        <PerformanceMonitor onDecline={() => setLight(true)} />
+
         <color attach="background" args={['#000000']} />
         
         {/* Dynamic Slate & Teal Studio Lighting */}
@@ -44,22 +51,23 @@ export default function SceneCanvas() {
         </Suspense>
 
         {/* Calmed Postprocessing Pass */}
-        <EffectComposer>
+        <EffectComposer multisampling={light ? 0 : 4}>
           <Bloom
             intensity={0.4}
             luminanceThreshold={0.4}
             luminanceSmoothing={0.85}
             mipmapBlur
           />
-          <ChromaticAberration
-            offset={new Vector2(0.0002, 0.0002)}
-          />
-          <DepthOfField
-            focusDistance={0.02}
-            focalLength={0.05}
-            bokehScale={2}
-            height={480}
-          />
+          {/* Depth of field and chromatic aberration are the costliest passes; skip them on the light profile */}
+          {!light ? <ChromaticAberration offset={new Vector2(0.0002, 0.0002)} /> : <></>}
+          {!light ? (
+            <DepthOfField
+              focusDistance={0.02}
+              focalLength={0.05}
+              bokehScale={2}
+              height={480}
+            />
+          ) : <></>}
           <Vignette
             eskil={false}
             offset={0.25}
