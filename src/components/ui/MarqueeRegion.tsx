@@ -1,7 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import { Pause, Play } from 'lucide-react'
+
+const REDUCED_MOTION = '(prefers-reduced-motion: reduce)'
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION)
+  mq.addEventListener('change', onChange)
+  return () => mq.removeEventListener('change', onChange)
+}
 
 // Wraps one or more auto-scrolling `.marquee-track` elements. Tracks pause while the
 // region is hovered or keyboard-focused, and the button pauses them until resumed.
@@ -17,18 +24,20 @@ export function MarqueeRegion({
   buttonClassName?: string
   children: React.ReactNode
 }) {
-  const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPaused(true)
-  }, [])
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false,
+  )
+  const [userPaused, setUserPaused] = useState<boolean | null>(null)
+  const paused = userPaused ?? reducedMotion
 
   return (
     <div className={`marquee-region ${className}`} data-paused={paused}>
       {children}
       <button
         type="button"
-        onClick={() => setPaused((p) => !p)}
+        onClick={() => setUserPaused(!paused)}
         aria-pressed={paused}
         aria-label={`${paused ? 'Play' : 'Pause'} ${label}`}
         title={paused ? 'Play' : 'Pause'}

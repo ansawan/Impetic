@@ -1,8 +1,18 @@
 'use client'
+import { useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight, Pause, Play, Sparkles } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { MarqueeRegion } from '@/components/ui/MarqueeRegion'
+
+// Seconds per loop; higher is slower (the shared carousel classes default to 65s)
+const ROW_LOOP_SECONDS = 90
+
+const REDUCED_MOTION = '(prefers-reduced-motion: reduce)'
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION)
+  mq.addEventListener('change', onChange)
+  return () => mq.removeEventListener('change', onChange)
+}
 
 interface CardItem {
   title: string
@@ -274,13 +284,30 @@ const CATEGORY_ROWS: ServiceCategoryRow[] = [
 ]
 
 export function CategoryServicesCarousel() {
+  // The button pauses every row; hover or keyboard focus pauses only that row
+  // Visitors who prefer reduced motion start paused until they press play
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false,
+  )
+  const [userPaused, setUserPaused] = useState<boolean | null>(null)
+  const paused = userPaused ?? reducedMotion
+  const [activeRow, setActiveRow] = useState<number | null>(null)
+
   return (
     <section id="explore-services" className="relative w-full py-24 sm:py-32 bg-black/60 backdrop-blur-md overflow-hidden select-none border-b border-white/8">
-      <MarqueeRegion
-        label="service carousels"
-        className="relative"
-        buttonClassName="absolute left-6 -top-12"
+      <div className="relative">
+      <button
+        type="button"
+        onClick={() => setUserPaused(!paused)}
+        aria-pressed={paused}
+        aria-label={`${paused ? 'Play' : 'Pause'} service carousels`}
+        title={paused ? 'Play' : 'Pause'}
+        className="absolute left-6 -top-12 z-20 inline-flex items-center justify-center w-9 h-9 rounded-full border border-[#4DE8DC]/40 bg-black/70 backdrop-blur-md text-[#4DE8DC] hover:bg-[#4DE8DC]/15 hover:border-[#4DE8DC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4DE8DC] transition-colors"
       >
+        {paused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+      </button>
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <SectionHeading
           align="center"
@@ -321,12 +348,24 @@ export function CategoryServicesCarousel() {
               </div>
 
               {/* Infinite Sliding Cards Track */}
-              <div className="relative overflow-hidden w-full py-4">
+              <div
+                className="relative overflow-hidden w-full py-4"
+                onMouseEnter={() => setActiveRow(idx)}
+                onMouseLeave={() => setActiveRow(null)}
+                onFocus={() => setActiveRow(idx)}
+                onBlur={() => setActiveRow(null)}
+              >
                 {/* Edge fade masks */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10" />
 
-                <div className={`marquee-track flex gap-6 w-max ${animClass} items-stretch`}>
+                <div
+                  className={`flex gap-6 w-max ${animClass} items-stretch`}
+                  style={{
+                    animationDuration: `${ROW_LOOP_SECONDS}s`,
+                    animationPlayState: paused || activeRow === idx ? 'paused' : 'running',
+                  }}
+                >
                   {loopedCards.map((card, cIdx) => (
                     <Link
                       key={cIdx}
@@ -361,7 +400,7 @@ export function CategoryServicesCarousel() {
           )
         })}
       </div>
-      </MarqueeRegion>
+      </div>
     </section>
   )
 }
