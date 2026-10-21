@@ -279,7 +279,7 @@ export function CategoryServicesCarousel() {
       <MarqueeRegion
         label="service carousels"
         className="relative"
-        buttonClassName="absolute right-6 -top-12"
+        buttonClassName="absolute left-6 -top-12"
       >
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <SectionHeading

@@ -9,7 +9,7 @@ import { Pause, Play } from 'lucide-react'
 export function MarqueeRegion({
   label,
   className = '',
-  buttonClassName = 'absolute right-3 top-1/2 -translate-y-1/2',
+  buttonClassName = 'absolute left-3 top-1/2 -translate-y-1/2',
   children,
 }: {
   label: string
