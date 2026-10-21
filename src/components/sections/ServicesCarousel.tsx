@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
+import { MarqueeRegion } from '@/components/ui/MarqueeRegion'
 
 interface ServiceItem {
   name: string
@@ -66,12 +67,12 @@ export function ServicesCarousel() {
   const loop = [...ALL_SERVICES, ...ALL_SERVICES]
 
   return (
-    <div className="relative overflow-hidden py-8 border-y border-white/8 bg-black/40 backdrop-blur-md select-none w-full">
+    <MarqueeRegion label="services list" className="relative overflow-hidden py-8 border-y border-white/8 bg-black/40 backdrop-blur-md select-none w-full">
       {/* Edge gradient fade masks */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
-      <div className="flex gap-3.5 w-max animate-carousel-slow hover:[animation-play-state:paused] items-center">
+      <div className="marquee-track flex gap-3.5 w-max animate-carousel-slow items-center">
         {loop.map((service, i) => (
           <Link
             key={i}
@@ -83,7 +84,7 @@ export function ServicesCarousel() {
           </Link>
         ))}
       </div>
-    </div>
+    </MarqueeRegion>
   )
 }
 

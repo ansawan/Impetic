@@ -1,4 +1,5 @@
 'use client'
+import { MarqueeRegion } from '@/components/ui/MarqueeRegion'
 
 interface PlatformLogo {
   name: string
@@ -110,12 +111,12 @@ export function LogoMarquee() {
   const loop = [...PLATFORMS, ...PLATFORMS]
 
   return (
-    <div className="relative overflow-hidden py-8 my-6 border-y border-white/8 bg-black/40 backdrop-blur-md select-none w-full flex items-center min-h-[90px]">
+    <MarqueeRegion label="platform logos" className="relative overflow-hidden py-8 my-6 border-y border-white/8 bg-black/40 backdrop-blur-md select-none w-full flex items-center min-h-[90px]">
       {/* Edge gradient fade masks */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
-      <div className="flex gap-8 w-max animate-carousel-scroll hover:[animation-play-state:paused] items-center">
+      <div className="marquee-track flex gap-8 w-max animate-carousel-scroll items-center">
         {loop.map((platform, i) => {
           const IconComp = platform.icon
           return (
@@ -133,7 +134,7 @@ export function LogoMarquee() {
           )
         })}
       </div>
-    </div>
+    </MarqueeRegion>
   )
 }
 export default LogoMarquee

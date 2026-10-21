@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Code, Workflow, Zap, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Activity, Code2, FileText, Lock, Plug, Webhook } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "API DEVELOPMENT & INTEGRATION",
+  titleLead: "API Development",
+  titleAccent: "& Integration",
+  tagline: "Type-Safe REST, GraphQL, and gRPC Microservice APIs.",
+  intro: [
+    "When your systems cannot talk to each other, people end up copying data by hand and decisions are made on outdated information. APIs are what let software share data and trigger actions reliably.",
+    "Impetic designs and builds secure, well-documented APIs and integrations — connecting your website, apps, CRM, payment, accounting and partner systems so data flows automatically.",
+  ],
+  capabilitiesTitle: "API Capabilities",
+  capabilities: [
+    { icon: Code2, title: "REST & GraphQL API development" },
+    { icon: Plug, title: "Third-party system integrations" },
+    { icon: Webhook, title: "Webhooks & event-driven workflows" },
+    { icon: Lock, title: "Authentication & API security" },
+    { icon: FileText, title: "Documentation & developer portals" },
+    { icon: Activity, title: "Monitoring, rate limiting & versioning" },
+  ],
+  featureBlocks: [
+    { icon: Code2, title: "APIs Designed to Last", description: "We design clear, consistent APIs with typed contracts, versioning and validation, so frontends, partners and future developers can rely on them." },
+    { icon: Plug, title: "Integrations Without the Headaches", description: "We connect the tools you rely on — CRMs, payment gateways, ERPs, marketing platforms — handling authentication, data mapping, retries and error cases." },
+    { icon: Lock, title: "Secure and Observable", description: "Every API includes proper authentication, authorization, rate limiting and logging, with monitoring that alerts you to failures or unusual traffic." },
+  ],
+  examples: [
+    { title: "CRM and website integration", description: "Website forms and bookings create and update CRM records automatically, with no manual entry." },
+    { title: "Payment and accounting sync", description: "Online payments are recorded in accounting software with the correct customer and invoice details." },
+    { title: "Public API for partners", description: "A platform exposes a documented API so partners can integrate their own systems." },
+    { title: "Mobile app backend", description: "A mobile app gets a secure, scalable API for accounts, content and transactions." },
+  ],
+  benefits: [
+    "Systems that share data automatically",
+    "Less manual data entry and fewer errors",
+    "A foundation for apps and partners",
+    "Secure, documented and maintainable code",
+  ],
+  processSteps: [
+    { step: "01", title: "Requirements", description: "Map systems, data and integration needs." },
+    { step: "02", title: "API Design", description: "Define endpoints, data contracts and security." },
+    { step: "03", title: "Build & Test", description: "Implement, test and document." },
+    { step: "04", title: "Deploy & Monitor", description: "Launch with monitoring and support." },
+  ],
+  ctaTitle: "Connect Your Systems",
+  ctaDescription: "Tell us which tools you need to integrate.",
+  faqs: [
+    { q: "What is an API?", a: "An API (application programming interface) is a defined way for software systems to exchange data and trigger actions with each other." },
+    { q: "REST or GraphQL — which should we use?", a: "REST is simple and widely supported; GraphQL is useful when clients need flexible data queries. We recommend based on your use case." },
+    { q: "Can you integrate with systems that have limited APIs?", a: "Often, yes. We work with available APIs, webhooks, file exports or other methods to connect systems reliably." },
+    { q: "How do you keep APIs secure?", a: "We use secure authentication, role-based access, input validation, rate limiting, encryption in transit and logging." },
+    { q: "Do you document the APIs you build?", a: "Yes. We provide clear documentation so your team and partners can use and maintain the API." },
+  ],
+}
 
 export default function APIDevelopmentIntegrationPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Code, title: 'Type-safe REST & GraphQL API engineering' },
-    { icon: Workflow, title: 'gRPC microservices & RPC protocols' },
-    { icon: Zap, title: 'Real-time WebSockets & SSE streaming' },
-    { icon: ShieldCheck, title: 'OAuth2, JWT authentication & rate limiting' },
-  ]
-
-  const featureBlocks = [
-    { icon: Code, title: 'API Engineering & Webhook Architecture', description: 'Design high-throughput, type-safe APIs with automated OpenAPI documentation and rate limiting.', badge: 'API Development' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'OpenAPI Specification', description: 'Define type contracts and endpoints.' },
-    { step: '02', title: 'API Build', description: 'Build high-speed backend routes with JWT auth.' },
-    { step: '03', title: 'Integration Test', description: 'Validate API performance under load.' },
-  ]
-
-  const faqs = [{ q: 'Do you build GraphQL and REST APIs?', a: 'Yes. We build type-safe REST, GraphQL, and gRPC endpoints based on your system communication requirements.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="API DEVELOPMENT &amp; INTEGRATION" title={<>API Development <span className="flux-word">&amp; Integration</span></>} description="Type-Safe REST, GraphQL, and gRPC Microservice APIs." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">High-performance API infrastructure connecting frontend apps, third-party webhooks, and microservices.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>API <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Build Production APIs Today" description="Contact our backend engineering team." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

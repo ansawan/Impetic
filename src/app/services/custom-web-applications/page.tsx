@@ -1,55 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Code, Zap, Layers, Globe, ShieldCheck, ArrowRight, ChevronDown } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Code2, Database, Gauge, LayoutDashboard, Lock, Plug } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "CUSTOM WEB APPLICATIONS",
+  titleLead: "Custom Web",
+  titleAccent: "Applications",
+  tagline: "High-Performance React/Next.js Platforms Built for Scale.",
+  intro: [
+    "Off-the-shelf software rarely fits the way your business actually works. Teams end up juggling spreadsheets, workarounds and disconnected tools to fill the gaps.",
+    "Impetic designs and builds custom web applications — portals, dashboards, internal tools and customer-facing platforms — with modern React and Next.js, built to be fast, secure and easy to extend as you grow.",
+  ],
+  capabilitiesTitle: "Web Application Capabilities",
+  capabilities: [
+    { icon: Code2, title: "React & Next.js development" },
+    { icon: LayoutDashboard, title: "Dashboards, portals & internal tools" },
+    { icon: Database, title: "Databases & backend APIs" },
+    { icon: Lock, title: "Authentication, roles & permissions" },
+    { icon: Plug, title: "Third-party & payment integrations" },
+    { icon: Gauge, title: "Performance, testing & accessibility" },
+  ],
+  featureBlocks: [
+    { icon: LayoutDashboard, title: "Built Around Your Workflow", description: "We start with how your users work, then design screens and flows that remove manual steps — so the application saves time from day one." },
+    { icon: Code2, title: "Modern, Maintainable Code", description: "We use proven frameworks, typed code, automated tests and clear documentation, so the application is reliable today and easy for any team to extend tomorrow." },
+    { icon: Gauge, title: "Fast and Secure by Default", description: "Performance budgets, secure authentication, role-based access and regular dependency updates are part of every build, not an afterthought." },
+  ],
+  examples: [
+    { title: "Customer portal", description: "Clients log in to view orders, invoices, documents and project status instead of emailing for updates." },
+    { title: "Internal operations dashboard", description: "A team replaces several spreadsheets with one application for tracking jobs, inventory or approvals." },
+    { title: "Booking and scheduling platform", description: "A service business lets customers book, reschedule and pay online, synced with staff calendars." },
+    { title: "Data reporting tool", description: "Managers get live dashboards built on data from several existing systems." },
+  ],
+  benefits: [
+    "Software that fits your process exactly",
+    "Less manual work and fewer spreadsheets",
+    "A scalable foundation for future features",
+    "Full ownership of your code",
+  ],
+  processSteps: [
+    { step: "01", title: "Discovery", description: "Requirements, user journeys and technical planning." },
+    { step: "02", title: "Design", description: "Wireframes, UI design and clickable prototypes." },
+    { step: "03", title: "Development", description: "Iterative builds with regular demos." },
+    { step: "04", title: "Launch & Support", description: "Deployment, training and ongoing improvements." },
+  ],
+  ctaTitle: "Build the Application Your Business Needs",
+  ctaDescription: "Tell us about your idea or process.",
+  faqs: [
+    { q: "What technologies do you use for web applications?", a: "We primarily build with React and Next.js on the frontend, with Node.js or other proven backends, relational databases and cloud hosting chosen to fit the project." },
+    { q: "How long does it take to build a custom web app?", a: "A focused first version often takes several weeks to a few months depending on features and integrations. We usually start with an MVP and grow from there." },
+    { q: "Will we own the code?", a: "Yes. You own the code and the application we build for you." },
+    { q: "Can you integrate with our existing systems?", a: "Yes. We integrate with CRMs, payment providers, accounting software and other tools through their APIs." },
+    { q: "Do you provide support after launch?", a: "Yes. We offer maintenance, monitoring and ongoing development after launch." },
+  ],
+}
 
 export default function CustomWebApplicationsPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Code, title: 'React, Next.js & TypeScript frontends' },
-    { icon: Zap, title: 'Real-time WebSocket & WebGL acceleration' },
-    { icon: Layers, title: 'Scalable serverless & cloud backends' },
-    { icon: Globe, title: 'Responsive UI/UX design systems' },
-    { icon: ShieldCheck, title: 'Security hardening & compliance' },
-  ]
-
-  const featureBlocks = [
-    { icon: Code, title: 'High-Performance Web Applications', description: 'Engineer ultra-responsive Next.js web applications built for speed, real-time interactivity, and enterprise scale.', badge: 'Web Architecture' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Architecture Blueprint', description: 'Design frontend component hierarchy and backend database schemas.' },
-    { step: '02', title: 'Agile Development', description: 'Build feature increments with type-safe APIs and CI/CD pipelines.' },
-    { step: '03', title: 'Deployment & Telemetry', description: 'Deploy to production with sub-second page loads and 24/7 telemetry.' },
-  ]
-
-  const faqs = [{ q: 'What tech stack do you use for web applications?', a: 'We specialize in React, Next.js, TypeScript, Node.js, Tailwind CSS, Three.js WebGL, Supabase, and PostgreSQL.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="CUSTOM WEB APPLICATIONS" title={<>Custom Web <span className="flux-word">Applications</span></>} description="High-Performance React/Next.js Platforms Built for Scale." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Engineering custom web platforms designed for real-time responsiveness, fluid animations, and robust backend stability.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Development <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Engineer Your Web Application" description="Schedule a technical roadmap session." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

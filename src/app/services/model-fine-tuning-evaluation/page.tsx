@@ -1,53 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Sliders, Cpu, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Cpu, Database, Gauge, ListChecks, ShieldCheck, SlidersHorizontal } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "MODEL FINE-TUNING & EVALUATION",
+  titleLead: "Model Fine-Tuning",
+  titleAccent: "& Evaluation",
+  tagline: "Tailor and Rigorously Test LLMs on Domain Data.",
+  intro: [
+    "General-purpose AI models are good at many things but rarely perfect at your specific task, tone or format. And without proper testing, it is hard to know whether a model is good enough to put in front of customers.",
+    "Impetic fine-tunes models on your domain data where it makes sense, and builds evaluation frameworks that measure quality, safety and cost — so you can choose and improve models based on evidence.",
+  ],
+  capabilitiesTitle: "Fine-Tuning & Evaluation Capabilities",
+  capabilities: [
+    { icon: Database, title: "Training data curation & labeling" },
+    { icon: SlidersHorizontal, title: "Supervised fine-tuning of LLMs" },
+    { icon: Cpu, title: "Open-weight & commercial model options" },
+    { icon: ListChecks, title: "Custom evaluation benchmarks" },
+    { icon: ShieldCheck, title: "Safety & regression testing" },
+    { icon: Gauge, title: "Cost, latency & quality trade-offs" },
+  ],
+  featureBlocks: [
+    { icon: Database, title: "Quality Data First", description: "Fine-tuning is only as good as its examples. We help collect, clean and label representative data that teaches the model exactly the behaviour you want." },
+    { icon: SlidersHorizontal, title: "Fine-Tune When It Adds Value", description: "We compare prompting, RAG and fine-tuning for your task, and only fine-tune when it improves quality, consistency or cost enough to justify it." },
+    { icon: ListChecks, title: "Evaluation You Can Trust", description: "We build test sets from real cases, define scoring criteria and run automated evaluations, so every model change is measured before it reaches users." },
+  ],
+  examples: [
+    { title: "Consistent brand tone", description: "A company fine-tunes a model to write product descriptions in its exact style and format." },
+    { title: "Domain classification", description: "A support team trains a model to categorize tickets accurately using its own historical labels." },
+    { title: "Smaller, cheaper model", description: "A business fine-tunes a smaller model that matches a larger model’s quality on one task at a fraction of the running cost." },
+    { title: "Model selection", description: "Before launch, several models are compared on the same evaluation set to choose the best balance of quality, speed and cost." },
+  ],
+  benefits: [
+    "Better accuracy on your specific tasks",
+    "More consistent output format and tone",
+    "Lower running costs where possible",
+    "Evidence-based model decisions",
+  ],
+  processSteps: [
+    { step: "01", title: "Task & Baseline", description: "Define the task and measure current model performance." },
+    { step: "02", title: "Data Preparation", description: "Collect and label training and test examples." },
+    { step: "03", title: "Fine-Tune & Compare", description: "Train candidates and compare against baselines." },
+    { step: "04", title: "Deploy & Monitor", description: "Ship the best model and keep evaluating." },
+  ],
+  ctaTitle: "Get a Model Built for Your Task",
+  ctaDescription: "Tell us your use case and we will recommend the right approach.",
+  faqs: [
+    { q: "What is fine-tuning?", a: "Fine-tuning trains an existing AI model further on your own examples so it performs a specific task, follows a format or matches a tone more reliably." },
+    { q: "Do we need fine-tuning or is prompting enough?", a: "Often good prompting or RAG is enough. We test simpler approaches first and recommend fine-tuning only when it clearly improves results or cost." },
+    { q: "How much training data is required?", a: "It varies by task. Some tasks improve with a few hundred high-quality examples, while others need more. We assess this during the baseline phase." },
+    { q: "What is model evaluation?", a: "Evaluation means testing a model against a set of representative cases with clear scoring criteria, so you can measure quality and catch regressions." },
+    { q: "Can you fine-tune open-source models?", a: "Yes. We work with both open-weight models that you can host and commercial models offered by major AI providers." },
+  ],
+}
 
 export default function ModelFineTuningEvaluationPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Sliders, title: 'Open-weight model fine-tuning (LoRA / QLoRA)' },
-    { icon: Cpu, title: 'Evaluation benchmark suites & test sets' },
-    { icon: ShieldCheck, title: 'Safety guardrails & output validation' },
-  ]
-
-  const featureBlocks = [
-    { icon: Sliders, title: 'Custom Model Fine-Tuning', description: 'Fine-tune open-source LLMs on your domain datasets for superior accuracy and lower inference costs.', badge: 'Fine-Tuning' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Data Preparation', description: 'Format and clean domain training datasets.' },
-    { step: '02', title: 'Model Training', description: 'Train Llama/Mistral models using LoRA/QLoRA.' },
-    { step: '03', title: 'Benchmarking', description: 'Evaluate model performance against baseline LLMs.' },
-  ]
-
-  const faqs = [{ q: 'Why fine-tune an open-source model?', a: 'Fine-tuning open-source models reduces API token costs, protects data privacy, and lowers latency.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="MODEL FINE-TUNING &amp; EVALUATION" title={<>Model Fine-Tuning <span className="flux-word">&amp; Evaluation</span></>} description="Tailor and Rigorously Test LLMs on Domain Data." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Fine-tune open-weight models and run rigorous evaluation benchmarks against real-world edge cases.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Fine-Tuning <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Fine-Tune Your Domain Models" description="Contact our ML engineers." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

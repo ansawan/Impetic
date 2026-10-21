@@ -1,53 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { LineChart, BarChart, Cpu, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { AlertTriangle, Database, LayoutDashboard, LineChart, Target, TrendingUp, Users } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "PREDICTIVE ANALYTICS & ML MODELS",
+  titleLead: "Predictive Analytics",
+  titleAccent: "& ML Models",
+  tagline: "Turn Historical Data into Accurate Revenue & Churn Forecasts.",
+  intro: [
+    "Your historical data holds patterns that can predict what happens next — which customers are likely to churn, which leads will convert, how much stock you will need, or what revenue to expect next quarter.",
+    "Impetic builds custom machine learning models trained on your data, validated against real outcomes and delivered where your team can use them: in dashboards, CRMs or your own applications.",
+  ],
+  capabilitiesTitle: "Machine Learning Capabilities",
+  capabilities: [
+    { icon: TrendingUp, title: "Demand & revenue forecasting" },
+    { icon: Users, title: "Churn prediction & retention scoring" },
+    { icon: Target, title: "Lead scoring & propensity models" },
+    { icon: AlertTriangle, title: "Anomaly & fraud detection" },
+    { icon: Database, title: "Data preparation & feature engineering" },
+    { icon: LayoutDashboard, title: "Predictions in dashboards & apps" },
+  ],
+  featureBlocks: [
+    { icon: Database, title: "Start With the Right Data", description: "Good predictions depend on clean, relevant data. We assess what you have, combine sources, fix quality issues and engineer the features that carry real predictive signal." },
+    { icon: LineChart, title: "Models Validated on Real Outcomes", description: "We test models on data they have not seen, compare them with simple baselines, and explain which factors drive predictions so the results are trustworthy and understandable." },
+    { icon: LayoutDashboard, title: "Predictions Where Decisions Happen", description: "A model only creates value when people act on it. We deliver scores and forecasts inside your CRM, dashboards or apps, and retrain them as new data arrives." },
+  ],
+  examples: [
+    { title: "Customer churn prediction", description: "A subscription business identifies customers at risk of cancelling so the team can intervene early with offers or support." },
+    { title: "Lead scoring", description: "Sales teams prioritize the leads most likely to convert based on past deal data and engagement." },
+    { title: "Inventory forecasting", description: "A retailer forecasts product demand by week to reduce stockouts and overstock." },
+    { title: "Anomaly detection", description: "A finance or operations team is alerted automatically when transactions or metrics behave unusually." },
+  ],
+  benefits: [
+    "Decisions based on forecasts, not gut feel",
+    "Earlier action on risks and opportunities",
+    "Better use of sales and retention effort",
+    "Models that improve as data grows",
+  ],
+  processSteps: [
+    { step: "01", title: "Problem & Data Review", description: "Define the prediction, success metric and data sources." },
+    { step: "02", title: "Modeling", description: "Feature engineering, training and validation." },
+    { step: "03", title: "Integration", description: "Deliver predictions into your tools." },
+    { step: "04", title: "Monitoring & Retraining", description: "Track accuracy and retrain as data changes." },
+  ],
+  ctaTitle: "Turn Your Data into Predictions",
+  ctaDescription: "Tell us what you want to forecast.",
+  faqs: [
+    { q: "How much data do we need for machine learning?", a: "It depends on the problem. Some forecasting and scoring models work with a few thousand records; more complex problems need more. We assess your data before recommending an approach." },
+    { q: "How accurate will the predictions be?", a: "Accuracy depends on the data and problem. We measure performance on held-out data, compare it with simple baselines and share realistic expectations before deployment." },
+    { q: "Can you explain why the model makes a prediction?", a: "Yes. We use interpretable models or explanation techniques to show which factors drive each prediction." },
+    { q: "Where will we see the predictions?", a: "In the tools your team already uses — such as your CRM, BI dashboards or internal applications — or through an API." },
+    { q: "Do models need maintenance?", a: "Yes. Customer behaviour and markets change, so we monitor accuracy and retrain models on new data regularly." },
+  ],
+}
 
 export default function PredictiveAnalyticsMLPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: LineChart, title: 'Customer churn & lifetime value forecasting' },
-    { icon: BarChart, title: 'Lead scoring & conversion likelihood models' },
-    { icon: Cpu, title: 'Custom classification & regression pipelines' },
-  ]
-
-  const featureBlocks = [
-    { icon: LineChart, title: 'Custom Machine Learning Models', description: 'Train machine learning models on your proprietary data to uncover actionable revenue intelligence.', badge: 'Predictive ML' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Data Cleaning', description: 'Aggregate and clean historical dataset features.' },
-    { step: '02', title: 'Model Training', description: 'Train and validate predictive models against real-world test sets.' },
-    { step: '03', title: 'API Deployment', description: 'Deploy low-latency scoring API endpoints.' },
-  ]
-
-  const faqs = [{ q: 'What data is required for predictive modeling?', a: 'Predictive models require historical behavioral, transactional, or operational data points with target outcome labels.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="PREDICTIVE ANALYTICS &amp; ML MODELS" title={<>Predictive Analytics <span className="flux-word">&amp; ML Models</span></>} description="Turn Historical Data into Accurate Revenue &amp; Churn Forecasts." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Custom machine learning models trained specifically on your company's proprietary data.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Predictive <span className="flux-word">Models</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Deploy Predictive ML Models" description="Contact our data science team." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

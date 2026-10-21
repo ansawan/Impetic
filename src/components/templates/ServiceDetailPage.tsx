@@ -21,6 +21,7 @@ export interface ServiceDetailContent {
   capabilitiesTitle: string
   capabilities: { icon: LucideIcon; title: string }[]
   featureBlocks: { icon: LucideIcon; title: string; description: string }[]
+  examples?: { title: string; description: string }[]
   benefits: string[]
   processSteps: { step: string; title: string; description: string }[]
   ctaTitle: string
@@ -74,6 +75,22 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
             </div>
           </section>
 
+          {content.examples && content.examples.length > 0 && (
+            <section className="py-12">
+              <ContentPanel className="max-w-5xl mx-auto">
+                <SectionHeading align="center" eyebrow="Examples" title={<>Example <span className="flux-word">Use Cases</span></>} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+                  {content.examples.map((ex, i) => (
+                    <div key={i} className="p-6 rounded-2xl border border-white/8 bg-white/[0.02]">
+                      <h3 className="font-semibold text-[#EAF6F5]">{ex.title}</h3>
+                      <p className="text-sm text-white/80 mt-2 leading-relaxed">{ex.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </ContentPanel>
+            </section>
+          )}
+
           <section className="py-12">
             <ContentPanel className="max-w-5xl mx-auto">
               <SectionHeading align="center" eyebrow="Why Impetic" title={<>Results You Can <span className="flux-word">Expect</span></>} />
@@ -86,7 +103,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <section className="py-12">
             <ContentPanel className="max-w-5xl mx-auto">
               <SectionHeading align="center" eyebrow="How It Works" title={<>Our <span className="flux-word">Process</span></>} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+              <div className={`grid grid-cols-1 gap-4 mt-10 ${content.processSteps.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
                 {content.processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === content.processSteps.length - 1} />))}
               </div>
             </ContentPanel>

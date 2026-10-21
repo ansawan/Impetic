@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Zap, Target, BarChart, FileText, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Eye, FlaskConical, Gauge, LayoutTemplate, MousePointerClick, Search } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "CONVERSION RATE OPTIMIZATION",
+  titleLead: "Conversion Rate",
+  titleAccent: "Optimization (CRO)",
+  tagline: "Turn More Existing Visitors into Paying Customers.",
+  intro: [
+    "Most businesses try to grow by buying more traffic. But if your landing pages, forms and checkout leak visitors, every extra click costs more than it should. Conversion rate optimization fixes the leaks first, so the traffic you already pay for produces more leads and sales.",
+    "Impetic combines analytics, user research and controlled A/B testing to find out why visitors leave — and then designs, builds and measures the changes that make them stay. Every test has a hypothesis, a success metric and a clear decision at the end.",
+  ],
+  capabilitiesTitle: "CRO Capabilities",
+  capabilities: [
+    { icon: Search, title: "Conversion audits & funnel drop-off analysis" },
+    { icon: Eye, title: "Heatmaps, session recordings & user research" },
+    { icon: FlaskConical, title: "A/B and multivariate testing" },
+    { icon: LayoutTemplate, title: "Landing page design & rebuilds" },
+    { icon: MousePointerClick, title: "Form, checkout & CTA optimization" },
+    { icon: Gauge, title: "Page speed & Core Web Vitals fixes" },
+  ],
+  featureBlocks: [
+    { icon: Search, title: "Find Where the Funnel Leaks", description: "We map every step from first visit to conversion, measure drop-off at each stage, and combine the numbers with heatmaps and session recordings to see exactly where — and why — visitors give up." },
+    { icon: FlaskConical, title: "Test Changes Before You Commit", description: "Instead of redesigning on opinion, we run statistically sound A/B tests on headlines, layouts, offers and forms. Winning variants are rolled out; losing ones teach us something without hurting revenue." },
+    { icon: Gauge, title: "Speed and UX as Conversion Levers", description: "Slow pages and confusing layouts quietly kill conversions. We fix load times, mobile usability and accessibility issues that stop people from completing a purchase or enquiry." },
+  ],
+  examples: [
+    { title: "Lead-gen landing page", description: "A services business running paid ads gets more enquiries from the same ad spend by simplifying a long form, adding trust signals near the call to action and testing two headline angles." },
+    { title: "Ecommerce checkout", description: "An online store reduces cart abandonment by removing forced account creation, showing delivery costs earlier and fixing a slow mobile payment step." },
+    { title: "SaaS free-trial signup", description: "A software company improves trial-to-paid conversion by testing pricing page layouts and adding a short onboarding checklist after signup." },
+    { title: "Local service booking", description: "A home service company turns more website visits into booked jobs by adding click-to-call, instant quote forms and clearer service-area information." },
+  ],
+  benefits: [
+    "More leads and sales from the traffic you already have",
+    "Lower cost per acquisition on paid campaigns",
+    "Decisions backed by test data, not opinions",
+    "A faster, easier experience for every visitor",
+  ],
+  processSteps: [
+    { step: "01", title: "Audit & Research", description: "Analytics review, heatmaps, recordings and a prioritized list of conversion issues." },
+    { step: "02", title: "Hypothesis & Design", description: "Clear test hypotheses with designs and copy for each variant." },
+    { step: "03", title: "Test & Measure", description: "A/B tests run to statistical confidence with clean tracking." },
+    { step: "04", title: "Roll Out & Repeat", description: "Winners are shipped and the next round of tests begins." },
+  ],
+  ctaTitle: "Get More From Your Existing Traffic",
+  ctaDescription: "Book a conversion audit and see where your funnel is leaking.",
+  faqs: [
+    { q: "What is conversion rate optimization?", a: "CRO is the process of increasing the percentage of visitors who take a desired action — such as buying, booking or filling in a form — by improving pages and user journeys based on data and testing." },
+    { q: "How much traffic do I need for A/B testing?", a: "Reliable A/B tests need enough conversions to reach statistical confidence. For lower-traffic sites we focus on research-led improvements and larger, bolder changes rather than small split tests." },
+    { q: "How long until we see results?", a: "Quick fixes such as speed and form issues can show results within weeks. A structured testing program usually delivers meaningful gains over two to three months." },
+    { q: "Will CRO affect my SEO?", a: "Done properly, CRO supports SEO. Faster pages, clearer content and better user engagement are positive signals, and we run tests in a way that search engines handle correctly." },
+    { q: "Do you build the changes or just recommend them?", a: "Both. We deliver the research and test plan, and our design and development team builds the variants and rolls out the winners." },
+  ],
+}
 
 export default function ConversionRateOptimizationPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Zap, title: 'A/B testing & multivariate experimentation' },
-    { icon: Target, title: 'Conversion funnel friction analysis' },
-    { icon: BarChart, title: 'Heatmap & session replay analytics' },
-    { icon: FileText, title: 'Landing page copy & UX redesign' },
-  ]
-
-  const featureBlocks = [
-    { icon: Zap, title: 'Conversion Rate Engineering', description: 'Turn more existing website traffic into qualified leads and sales without increasing ad spend.', badge: 'CRO Mastery' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Funnel Audit', description: 'Analyze drop-off points in your current conversion path.' },
-    { step: '02', title: 'Hypothesize & Design', description: 'Design test variants for key call-to-action buttons, forms, and copy.' },
-    { step: '03', title: 'A/B Test & Deploy', description: 'Run controlled split tests until statistical significance is achieved.' },
-  ]
-
-  const faqs = [{ q: 'What lifts in conversion rates can we expect?', a: 'Typical CRO campaigns achieve 15% to 45% conversion improvements across key landing pages.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="CONVERSION RATE OPTIMIZATION" title={<>Conversion Rate <span className="flux-word">Optimization (CRO)</span></>} description="Turn More Existing Visitors into Paying Customers." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Data-driven testing, UX optimizations, and conversion funnel analysis to lower CAC.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>CRO <span className="flux-word">Testing</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Boost Your Conversion Rate" description="Contact our optimization team today." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

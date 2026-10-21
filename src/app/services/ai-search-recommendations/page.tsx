@@ -1,53 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Search, Sparkles, Database, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { BarChart3, Database, Filter, Search, SlidersHorizontal, Sparkles } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "AI-POWERED SEARCH & RECOMMENDATIONS",
+  titleLead: "AI-Powered Search",
+  titleAccent: "& Recommendations",
+  tagline: "Semantic Vector Search and Personalization Engines That Understand Intent.",
+  intro: [
+    "Traditional keyword search fails when customers describe what they want in their own words. If they cannot find it, they leave — even when you have exactly the right product or answer.",
+    "Impetic builds AI-powered search and recommendation systems that understand meaning and intent, rank results by relevance and personalize what each user sees, helping people find what they need faster.",
+  ],
+  capabilitiesTitle: "Search & Personalization Capabilities",
+  capabilities: [
+    { icon: Search, title: "Semantic & hybrid search" },
+    { icon: Sparkles, title: "Personalized recommendations" },
+    { icon: SlidersHorizontal, title: "Relevance tuning & ranking" },
+    { icon: Filter, title: "Faceted filters & autocomplete" },
+    { icon: Database, title: "Vector database architecture" },
+    { icon: BarChart3, title: "Search analytics & A/B testing" },
+  ],
+  featureBlocks: [
+    { icon: Search, title: "Search That Understands Meaning", description: "Semantic search uses embeddings to match the intent behind a query, so “waterproof shoes for hiking” finds the right products even if those exact words never appear." },
+    { icon: Sparkles, title: "Recommendations That Feel Personal", description: "We combine behaviour, item similarity and context to recommend relevant products, content or listings — on product pages, in carts, emails or home pages." },
+    { icon: BarChart3, title: "Measured and Continuously Tuned", description: "We track searches with no results, click-through and conversions, and test ranking changes so search quality improves over time." },
+  ],
+  examples: [
+    { title: "Ecommerce product search", description: "An online store returns relevant products for natural-language searches and reduces “no results” pages." },
+    { title: "Content recommendations", description: "A publisher or learning platform recommends related articles or courses based on what each user reads." },
+    { title: "Marketplace listings", description: "A marketplace ranks listings by relevance, location and user preferences." },
+    { title: "Internal document search", description: "Employees find documents by describing what they need instead of guessing file names." },
+  ],
+  benefits: [
+    "Customers find what they want faster",
+    "Higher engagement and conversion",
+    "Fewer empty search results",
+    "Insights into what users are looking for",
+  ],
+  processSteps: [
+    { step: "01", title: "Audit", description: "Analyze current search behaviour and gaps." },
+    { step: "02", title: "Design", description: "Choose models, index structure and ranking strategy." },
+    { step: "03", title: "Build & Integrate", description: "Implement search and recommendations in your product." },
+    { step: "04", title: "Test & Tune", description: "Measure relevance and optimize continuously." },
+  ],
+  ctaTitle: "Upgrade Your Search Experience",
+  ctaDescription: "Let us show you how AI search can work for your catalog or content.",
+  faqs: [
+    { q: "What is semantic search?", a: "Semantic search finds results based on meaning rather than exact keywords, using AI embeddings to match the intent of a query with relevant items." },
+    { q: "Can AI search work alongside keyword search?", a: "Yes. Hybrid search combines semantic and keyword matching, which usually gives the best results for product codes, names and natural-language queries." },
+    { q: "How do recommendations work?", a: "They use signals such as browsing and purchase behaviour, item similarity and context to suggest items each user is likely to find relevant." },
+    { q: "Will this work with our existing platform?", a: "We integrate with custom applications and common ecommerce and CMS platforms through APIs." },
+    { q: "How do you measure search quality?", a: "We track metrics like click-through rate, conversion from search, zero-result searches and relevance judgements, and test improvements over time." },
+  ],
+}
 
 export default function AISearchRecommendationsPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Search, title: 'Semantic vector search engines' },
-    { icon: Sparkles, title: 'Personalized product & content recommendation engines' },
-    { icon: Database, title: 'Real-time embedding generation & re-ranking' },
-  ]
-
-  const featureBlocks = [
-    { icon: Search, title: 'Semantic Search Engineering', description: 'Replace keyword-matching search with AI vector search that understands user intent.', badge: 'Semantic Search' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Catalog Indexing', description: 'Generate embeddings for products, articles, or catalog items.' },
-    { step: '02', title: 'Search Tuning', description: 'Tune vector similarity weights and hybrid search parameters.' },
-    { step: '03', title: 'Integration', description: 'Deploy search endpoints directly to your frontend app.' },
-  ]
-
-  const faqs = [{ q: 'How does semantic search differ from keyword search?', a: 'Semantic search matches results based on conceptual meaning rather than exact word matches.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="AI-POWERED SEARCH &amp; RECOMMENDATIONS" title={<>AI-Powered Search <span className="flux-word">&amp; Recommendations</span></>} description="Semantic Vector Search and Personalization Engines That Understand Intent." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Deliver relevant search results and personalized product recommendations to boost user engagement and conversions.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Search <span className="flux-word">Engine</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Deploy AI Search &amp; Recommendations" description="Contact our search team today." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

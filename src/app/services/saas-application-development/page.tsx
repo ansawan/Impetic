@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Layers, Database, ShieldCheck, DollarSign, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Boxes, Cloud, CreditCard, LayoutDashboard, Lock, Rocket } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "SAAS APPLICATION DEVELOPMENT",
+  titleLead: "SaaS Application",
+  titleAccent: "Development",
+  tagline: "Multi-Tenant SaaS Architecture Built for Scale and Recurring Revenue.",
+  intro: [
+    "Building a SaaS product means more than building features. You need secure multi-tenant data, subscriptions and billing, onboarding, admin tools and an architecture that keeps working as customers grow from ten to ten thousand.",
+    "Impetic takes SaaS products from idea to launch and beyond — designing the architecture, building the product and putting the operational foundations in place for recurring revenue.",
+  ],
+  capabilitiesTitle: "SaaS Capabilities",
+  capabilities: [
+    { icon: Boxes, title: "Multi-tenant architecture" },
+    { icon: CreditCard, title: "Subscriptions & billing integration" },
+    { icon: Lock, title: "Authentication, SSO & roles" },
+    { icon: Rocket, title: "MVP design & rapid launch" },
+    { icon: LayoutDashboard, title: "Admin panels & analytics" },
+    { icon: Cloud, title: "Scalable cloud infrastructure" },
+  ],
+  featureBlocks: [
+    { icon: Boxes, title: "Architecture That Scales With Customers", description: "We design tenant isolation, data models and infrastructure so each customer’s data stays secure and the platform performs well as usage grows." },
+    { icon: CreditCard, title: "Billing and Subscriptions Built In", description: "Plans, trials, upgrades, invoices and usage-based billing are integrated with leading payment providers, so revenue flows from day one." },
+    { icon: Rocket, title: "Launch Fast, Then Iterate", description: "We help you define a focused MVP, launch it quickly to real users, and use feedback and analytics to prioritize what to build next." },
+  ],
+  examples: [
+    { title: "Industry-specific SaaS", description: "A founder with deep industry knowledge launches a scheduling and management platform for businesses in that niche." },
+    { title: "Turning a service into software", description: "An agency productizes its internal tools into a subscription product for other businesses." },
+    { title: "B2B platform with team accounts", description: "A product supports organizations with multiple users, roles, permissions and single sign-on." },
+    { title: "Scaling an existing MVP", description: "An early-stage SaaS rebuilds parts of its prototype to handle more customers and add billing and admin tools." },
+  ],
+  benefits: [
+    "A secure, scalable product foundation",
+    "Recurring revenue infrastructure from launch",
+    "Faster time to market with a focused MVP",
+    "A technical partner beyond version one",
+  ],
+  processSteps: [
+    { step: "01", title: "Product Discovery", description: "Define users, core features and business model." },
+    { step: "02", title: "Architecture & Design", description: "Plan tenancy, data, billing and UI." },
+    { step: "03", title: "MVP Build", description: "Develop, test and launch the first version." },
+    { step: "04", title: "Scale & Grow", description: "Iterate on feedback and scale infrastructure." },
+  ],
+  ctaTitle: "Launch Your SaaS Product",
+  ctaDescription: "Share your product idea and we will map the path to launch.",
+  faqs: [
+    { q: "What is multi-tenant architecture?", a: "It is a design where one application serves many customer organizations while keeping each one’s data separate and secure." },
+    { q: "How long does it take to build a SaaS MVP?", a: "A focused MVP commonly takes a few months, depending on features, integrations and design requirements." },
+    { q: "Which payment providers do you integrate?", a: "We integrate with leading subscription billing providers, including Stripe, and can work with others based on your markets." },
+    { q: "Can you take over an existing SaaS codebase?", a: "Yes. We review the code and infrastructure, fix critical issues and continue development." },
+    { q: "Do you help with hosting and DevOps?", a: "Yes. We set up cloud hosting, CI/CD, monitoring and backups as part of the build." },
+  ],
+}
 
 export default function SaaSApplicationDevelopmentPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Layers, title: 'Multi-tenant database & data isolation' },
-    { icon: DollarSign, title: 'Stripe subscription & billing integration' },
-    { icon: ShieldCheck, title: 'Role-based access control (RBAC)' },
-    { icon: Database, title: 'Scalable cloud infrastructure & telemetry' },
-  ]
-
-  const featureBlocks = [
-    { icon: Layers, title: 'End-to-End SaaS Engineering', description: 'Architect multi-tenant SaaS platforms with secure data isolation, automated billing, and user management.', badge: 'SaaS Platform' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Data Architecture', description: 'Design multi-tenant isolation and subscription data models.' },
-    { step: '02', title: 'SaaS Build', description: 'Develop authentication, billing, dashboard interfaces, and backend logic.' },
-    { step: '03', title: 'Launch', description: 'Deploy cloud infrastructure with automated tenant onboarding.' },
-  ]
-
-  const faqs = [{ q: 'Do you handle Stripe & billing integration?', a: 'Yes. We build complete subscription management, usage-based billing, and invoice portals using Stripe Billing.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="SAAS APPLICATION DEVELOPMENT" title={<>SaaS Application <span className="flux-word">Development</span></>} description="Multi-Tenant SaaS Architecture Built for Scale and Recurring Revenue." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Full-lifecycle SaaS engineering from initial multi-tenant architecture to billing and scale.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>SaaS <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Engineer Your SaaS Platform" description="Contact our SaaS architects today." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

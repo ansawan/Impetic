@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Bot, Workflow, Cpu, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Activity, Bot, Brain, ListChecks, ShieldCheck, Workflow } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "CUSTOM AI AGENTS",
+  titleLead: "Custom",
+  titleAccent: "AI Agents",
+  tagline: "Autonomous Multi-Step AI Systems That Take Real Actions.",
+  intro: [
+    "AI agents go beyond chat. Given a goal, an agent can plan the steps, call tools and APIs, check its own work and complete multi-step tasks — from researching leads to processing documents or updating systems.",
+    "Impetic builds custom AI agents designed around your real workflows, with clear limits on what they can do, approval steps for important actions, and full logging so you always know what happened and why.",
+  ],
+  capabilitiesTitle: "Agent Capabilities",
+  capabilities: [
+    { icon: Bot, title: "Single and multi-agent systems" },
+    { icon: Workflow, title: "Tool calling & API execution" },
+    { icon: Brain, title: "Planning, memory & long-running tasks" },
+    { icon: ShieldCheck, title: "Human-in-the-loop approvals" },
+    { icon: ListChecks, title: "Evaluation & reliability testing" },
+    { icon: Activity, title: "Logging, monitoring & cost control" },
+  ],
+  featureBlocks: [
+    { icon: Bot, title: "Agents Built Around Your Workflow", description: "We break a business process into clear steps and roles, then build agents that use your tools — CRM, email, spreadsheets, internal APIs — to complete the work end to end." },
+    { icon: ShieldCheck, title: "Guardrails and Human Approval", description: "Agents operate within defined permissions. Sensitive actions such as sending emails, changing records or spending money can require human approval before they run." },
+    { icon: Activity, title: "Observable and Measurable", description: "Every step, tool call and decision is logged. We measure success rates, time saved and cost per task so you can trust the agent in production." },
+  ],
+  examples: [
+    { title: "Lead research agent", description: "An agent researches new leads, enriches company data, scores fit and drafts personalized outreach for a salesperson to review." },
+    { title: "Document processing agent", description: "Incoming invoices or forms are read, validated, entered into the right system and flagged when something looks wrong." },
+    { title: "Operations assistant", description: "An agent monitors an inbox or queue, categorizes requests, gathers information and prepares responses or tasks for the team." },
+    { title: "Reporting agent", description: "An agent pulls data from several tools each week, summarizes performance and highlights anomalies for managers." },
+  ],
+  benefits: [
+    "Hours of repetitive work automated",
+    "Consistent execution of multi-step processes",
+    "Human control over important decisions",
+    "Clear logs and measurable ROI",
+  ],
+  processSteps: [
+    { step: "01", title: "Task Decomposition", description: "Map the process, decisions and tools involved." },
+    { step: "02", title: "Agent Engineering", description: "Build prompts, tools, memory and guardrails." },
+    { step: "03", title: "Evaluation", description: "Test on real scenarios and edge cases." },
+    { step: "04", title: "Deploy & Monitor", description: "Run in production with logging and oversight." },
+  ],
+  ctaTitle: "Deploy Custom AI Agents",
+  ctaDescription: "Tell us which process you want to automate.",
+  faqs: [
+    { q: "What is an AI agent?", a: "An AI agent is software that uses a language model to plan and carry out tasks: it can break down a goal, call tools or APIs, evaluate results and continue until the task is complete." },
+    { q: "How is an agent different from a chatbot?", a: "A chatbot mainly answers questions. An agent takes actions across systems — such as updating records, sending messages or processing documents — to complete a task." },
+    { q: "Are AI agents safe to use in business?", a: "With the right design, yes. We limit permissions, require approval for sensitive actions, test against edge cases and log everything the agent does." },
+    { q: "Which tools can an agent connect to?", a: "Agents can use any system with an API, plus common tools such as CRMs, email, calendars, spreadsheets, databases and internal services." },
+    { q: "How do you measure if an agent is working?", a: "We track task success rate, accuracy, time saved, escalations and cost per task, and review results regularly to improve the agent." },
+  ],
+}
 
 export default function CustomAIAgentsPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Bot, title: 'Multi-agent orchestration & crew workflows' },
-    { icon: Workflow, title: 'Autonomous tool-calling & API execution' },
-    { icon: Cpu, title: 'Stateful memory & long-term context retention' },
-    { icon: ShieldCheck, title: 'Human-in-the-loop approval workflows' },
-  ]
-
-  const featureBlocks = [
-    { icon: Bot, title: 'Autonomous Execution Engines', description: 'Build AI agents that execute complex, multi-step business operations independently.', badge: 'Agentic Systems' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Task Decomposition', description: 'Deconstruct complex business tasks into discrete agent roles.' },
-    { step: '02', title: 'Agent Engineering', description: 'Program prompt templates, tool bindings, and state memory.' },
-    { step: '03', title: 'Deployment & Monitoring', description: 'Deploy agents in production with telemetry oversight.' },
-  ]
-
-  const faqs = [{ q: 'What is an autonomous AI agent?', a: 'An AI agent is a software entity that can break down goals, call external APIs/tools, evaluate its own intermediate steps, and execute tasks autonomously.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="CUSTOM AI AGENTS" title={<>Custom <span className="flux-word">AI Agents</span></>} description="Autonomous Multi-Step AI Systems That Take Real Actions." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Production agentic AI systems capable of executing multi-step workflows, tool calls, and automated business decisions.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Agentic <span className="flux-word">Capabilities</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Deploy Custom AI Agents" description="Contact our agentic AI engineers today." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

@@ -108,3 +108,10 @@
   animation: carousel-scroll-reverse 65s linear infinite;
 }
 
+/* Auto-scrolling rows pause on hover, keyboard focus, or the region's pause button */
+.marquee-region:hover .marquee-track,
+.marquee-region:focus-within .marquee-track,
+.marquee-region[data-paused='true'] .marquee-track {
+  animation-play-state: paused;
+}
+

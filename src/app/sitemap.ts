@@ -1,8 +1,20 @@
+import { execFileSync } from 'node:child_process';
 import { MetadataRoute } from 'next';
 import { blogService } from '@/lib/services/blogService';
 import { absoluteUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
+
+// Last time a page's own source (page.tsx / layout.tsx) changed, from git history.
+// Falls back to the build time if git or the history is unavailable (e.g. a shallow clone).
+function lastModified(route: string): string {
+  const files = route === '' ? ['src/app/page.tsx'] : [`src/app${route}/page.tsx`, `src/app${route}/layout.tsx`];
+  try {
+    const iso = execFileSync('git', ['log', '-1', '--format=%cI', '--', ...files], { encoding: 'utf8' }).trim();
+    if (iso) return new Date(iso).toISOString();
+  } catch {}
+  return new Date().toISOString();
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Base static canonical routes (absoluteUrl adds the trailing slash the host serves with a 200)
@@ -65,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services/legacy-system-modernization',
   ].map((route) => ({
     url: absoluteUrl(route),
-    lastModified: new Date().toISOString(),
+    lastModified: lastModified(route),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : 0.8,
   }));

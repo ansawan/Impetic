@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { MarqueeRegion } from '@/components/ui/MarqueeRegion'
 
 interface CardItem {
   title: string
@@ -275,6 +276,11 @@ const CATEGORY_ROWS: ServiceCategoryRow[] = [
 export function CategoryServicesCarousel() {
   return (
     <section id="explore-services" className="relative w-full py-24 sm:py-32 bg-black/60 backdrop-blur-md overflow-hidden select-none border-b border-white/8">
+      <MarqueeRegion
+        label="service carousels"
+        className="relative"
+        buttonClassName="absolute right-6 -top-12"
+      >
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <SectionHeading
           align="center"
@@ -320,7 +326,7 @@ export function CategoryServicesCarousel() {
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10" />
 
-                <div className={`flex gap-6 w-max ${animClass} hover:[animation-play-state:paused] items-stretch`}>
+                <div className={`marquee-track flex gap-6 w-max ${animClass} items-stretch`}>
                   {loopedCards.map((card, cIdx) => (
                     <Link
                       key={cIdx}
@@ -355,6 +361,7 @@ export function CategoryServicesCarousel() {
           )
         })}
       </div>
+      </MarqueeRegion>
     </section>
   )
 }

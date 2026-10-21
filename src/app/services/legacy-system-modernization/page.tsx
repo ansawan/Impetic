@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Layers, Zap, Code, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Cloud, Database, Plug, RefreshCw, Search, ShieldCheck } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "LEGACY SYSTEM MODERNIZATION",
+  titleLead: "Legacy System",
+  titleAccent: "Modernization",
+  tagline: "Refactoring Monoliths into Cloud-Native Architectures with Zero Downtime.",
+  intro: [
+    "Legacy systems often still run critical parts of a business, but they become slower to change, harder to secure and more expensive to maintain every year — and the people who understand them keep getting harder to find.",
+    "Impetic modernizes legacy software step by step: moving it to modern technology and cloud infrastructure while the business keeps running, so you reduce risk instead of betting everything on one big rewrite.",
+  ],
+  capabilitiesTitle: "Modernization Capabilities",
+  capabilities: [
+    { icon: Search, title: "Legacy system assessment" },
+    { icon: RefreshCw, title: "Incremental refactoring & rewrites" },
+    { icon: Cloud, title: "Cloud migration" },
+    { icon: Database, title: "Data migration & database upgrades" },
+    { icon: Plug, title: "APIs around legacy systems" },
+    { icon: ShieldCheck, title: "Security & compliance updates" },
+  ],
+  featureBlocks: [
+    { icon: Search, title: "Understand Before You Change", description: "We map the existing system, its dependencies, data and business rules, and identify which parts carry the most risk and the most value to modernize." },
+    { icon: RefreshCw, title: "Modernize Without Stopping the Business", description: "Using incremental approaches, new components replace old ones piece by piece behind stable interfaces, so users keep working throughout the migration." },
+    { icon: Cloud, title: "A Platform Ready for the Future", description: "The result is maintainable code on modern infrastructure, with automated testing, deployment and monitoring that make future changes faster and safer." },
+  ],
+  examples: [
+    { title: "Desktop software to web", description: "An internal desktop application is rebuilt as a secure web application accessible from anywhere." },
+    { title: "On-premise to cloud", description: "Servers in an office are migrated to cloud hosting with backups, monitoring and better uptime." },
+    { title: "Breaking up a monolith", description: "A large, tightly coupled application is gradually split into services that can be updated independently." },
+    { title: "Database upgrade", description: "An outdated database is migrated to a supported version with data validated end to end." },
+  ],
+  benefits: [
+    "Lower maintenance and hosting costs",
+    "Improved security and reliability",
+    "Faster delivery of new features",
+    "Reduced risk compared with a big-bang rewrite",
+  ],
+  processSteps: [
+    { step: "01", title: "Assessment", description: "Analyze code, data, infrastructure and risks." },
+    { step: "02", title: "Roadmap", description: "Plan phased modernization with clear milestones." },
+    { step: "03", title: "Incremental Migration", description: "Replace components and migrate data safely." },
+    { step: "04", title: "Optimize", description: "Retire old systems and improve the new platform." },
+  ],
+  ctaTitle: "Modernize Your Legacy Systems",
+  ctaDescription: "Start with an assessment of your current system.",
+  faqs: [
+    { q: "What is legacy system modernization?", a: "It is the process of updating old software and infrastructure to modern technologies so they are easier to maintain, more secure and able to support new business needs." },
+    { q: "Should we rewrite from scratch or modernize gradually?", a: "Gradual modernization is usually lower risk because the business keeps running and value is delivered in stages. A full rewrite can make sense for small or very outdated systems." },
+    { q: "Will there be downtime during migration?", a: "We plan migrations to minimize or avoid downtime, using parallel running, phased cutovers and tested rollback plans." },
+    { q: "Can you work with old or uncommon technologies?", a: "Yes. We assess the existing technology, document how it works and plan the safest path forward." },
+    { q: "How long does modernization take?", a: "It depends on the size and complexity of the system. We break the work into phases so improvements arrive throughout the project." },
+  ],
+}
 
 export default function LegacySystemModernizationPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Layers, title: 'Monolith to cloud-native microservices refactoring' },
-    { icon: Zap, title: 'Zero-downtime database migration' },
-    { icon: Code, title: 'Modern React/Next.js frontend migration' },
-    { icon: ShieldCheck, title: 'Legacy security patching & technical debt reduction' },
-  ]
-
-  const featureBlocks = [
-    { icon: Layers, title: 'Zero-Downtime System Modernization', description: 'Refactor aging monoliths into modern cloud architectures without interrupting live business operations.', badge: 'Modernization' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Codebase Audit', description: 'Evaluate technical debt, security vulnerabilities, and legacy dependencies.' },
-    { step: '02', title: 'Strangler Fig Migration', description: 'Incrementally migrate features into cloud-native microservices.' },
-    { step: '03', title: 'Cutover & Validation', description: 'Complete final zero-downtime database cutover.' },
-  ]
-
-  const faqs = [{ q: 'How do you prevent downtime during migration?', a: 'We use the Strangler Fig pattern and dual-write database sync to migrate services incrementally with zero downtime.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="LEGACY SYSTEM MODERNIZATION" title={<>Legacy System <span className="flux-word">Modernization</span></>} description="Refactoring Monoliths into Cloud-Native Architectures with Zero Downtime." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Upgrade legacy codebase infrastructure, improve system performance, and eliminate technical debt safely.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Modernization <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Modernize Your Legacy Systems" description="Contact our cloud refactoring team." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

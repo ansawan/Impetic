@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { RelatedServices } from '@/components/sections/RelatedServices'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/' },
@@ -14,5 +15,10 @@ export const metadata: Metadata = {
 }
 
 export default function ServicesLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      {children}
+      <RelatedServices />
+    </>
+  )
 }

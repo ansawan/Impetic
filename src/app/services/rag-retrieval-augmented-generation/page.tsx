@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Database, Search, Cpu, FileText, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Activity, Database, FileSearch, Layers, Lock, Quote } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "RETRIEVAL-AUGMENTED GENERATION (RAG)",
+  titleLead: "Retrieval-Augmented",
+  titleAccent: "Generation (RAG)",
+  tagline: "Ground Your AI Outputs in Verifiable Proprietary Knowledge.",
+  intro: [
+    "Large language models are powerful, but on their own they do not know your contracts, manuals, tickets or internal documents — and they can answer confidently even when they are wrong.",
+    "Retrieval-augmented generation (RAG) fixes this by finding the most relevant passages from your own data and giving them to the model at answer time. Impetic designs and builds RAG systems that return accurate, cited answers from your knowledge.",
+  ],
+  capabilitiesTitle: "RAG Capabilities",
+  capabilities: [
+    { icon: FileSearch, title: "Document ingestion & smart chunking" },
+    { icon: Database, title: "Vector databases & hybrid search" },
+    { icon: Layers, title: "Re-ranking for more relevant results" },
+    { icon: Quote, title: "Cited answers with source links" },
+    { icon: Lock, title: "Permission-aware retrieval" },
+    { icon: Activity, title: "Answer quality evaluation & monitoring" },
+  ],
+  featureBlocks: [
+    { icon: FileSearch, title: "Turn Scattered Documents into Searchable Knowledge", description: "We ingest PDFs, wikis, help centers, tickets and databases, clean and structure them, and keep the index updated as your content changes." },
+    { icon: Layers, title: "Retrieval That Finds the Right Passage", description: "Combining semantic vector search, keyword search and re-ranking means the model sees the passages that actually answer the question, not just similar-sounding text." },
+    { icon: Quote, title: "Answers You Can Verify", description: "Every answer can include citations to the source documents, so users can check the facts — essential for legal, financial, technical and support use cases." },
+  ],
+  examples: [
+    { title: "Support knowledge base", description: "Support agents get instant, cited answers from product manuals and past tickets, reducing time spent searching." },
+    { title: "Internal policy assistant", description: "Employees ask HR, IT or compliance questions and receive answers that link to the exact policy section." },
+    { title: "Contract and document Q&A", description: "A legal or operations team queries large sets of contracts and documents in plain language." },
+    { title: "Technical documentation search", description: "Developers or customers search technical docs by meaning rather than exact keywords." },
+  ],
+  benefits: [
+    "Accurate answers based on your own data",
+    "Citations that build trust",
+    "Knowledge that stays current as documents change",
+    "Access controls that respect permissions",
+  ],
+  processSteps: [
+    { step: "01", title: "Data Review", description: "Identify sources, formats, permissions and update frequency." },
+    { step: "02", title: "Pipeline Build", description: "Ingestion, chunking, embeddings and indexing." },
+    { step: "03", title: "Retrieval & Answering", description: "Search, re-ranking, prompting and citations." },
+    { step: "04", title: "Evaluate & Monitor", description: "Measure answer quality and improve over time." },
+  ],
+  ctaTitle: "Put Your Knowledge to Work with RAG",
+  ctaDescription: "Show us your documents and use case, and we will design the right RAG system.",
+  faqs: [
+    { q: "What is retrieval-augmented generation?", a: "RAG is a technique where an AI system first searches your own documents for relevant information and then uses that information to write its answer, making responses more accurate and specific." },
+    { q: "Is RAG better than fine-tuning?", a: "They solve different problems. RAG is best for answering questions from changing knowledge; fine-tuning is better for changing a model’s style or behaviour. Many systems use both." },
+    { q: "What types of documents can you use?", a: "Common sources include PDFs, Word documents, web pages, wikis, help centers, tickets, spreadsheets and databases." },
+    { q: "Can users only see documents they have access to?", a: "Yes. We can apply permission filters at retrieval time so users only get answers from content they are allowed to see." },
+    { q: "How do you measure answer quality?", a: "We build test sets of real questions and score retrieval relevance and answer accuracy, then track quality over time in production." },
+  ],
+}
 
 export default function RAGPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Database, title: 'Pinecone, Qdrant & pgvector vector DB setup' },
-    { icon: Search, title: 'Hybrid keyword + semantic vector retrieval' },
-    { icon: FileText, title: 'Document chunking & embedding pipelines' },
-    { icon: Cpu, title: 'Citation & hallucination prevention guardrails' },
-  ]
-
-  const featureBlocks = [
-    { icon: Database, title: 'Ground Model Outputs in Real Data', description: 'Eliminate hallucinations by connecting LLMs directly to your internal vector knowledge base.', badge: 'RAG Architecture' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'Data Ingestion', description: 'Extract, chunk, and embed internal documents and database records.' },
-    { step: '02', title: 'Vector Indexing', description: 'Build scalable vector indices optimized for sub-100ms retrieval.' },
-    { step: '03', title: 'Eval & Deployment', description: 'Benchmark retrieval accuracy and deploy production endpoints.' },
-  ]
-
-  const faqs = [{ q: 'How does RAG eliminate hallucinations?', a: 'RAG grounds every LLM answer strictly in retrieved document passages, forcing the model to cite exact source data.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="RETRIEVAL-AUGMENTED GENERATION (RAG)" title={<>Retrieval-Augmented <span className="flux-word">Generation (RAG)</span></>} description="Ground Your AI Outputs in Verifiable Proprietary Knowledge." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Production RAG architecture combining high-speed vector databases, semantic search, and document ingestion pipelines.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>RAG <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Deploy Enterprise RAG" description="Schedule a consultation with our vector search engineers." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

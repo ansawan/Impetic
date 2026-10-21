@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Smartphone, Zap, Globe, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Bell, LayoutTemplate, Lock, Rocket, Server, Smartphone } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "MOBILE APP DEVELOPMENT",
+  titleLead: "Mobile App",
+  titleAccent: "Development",
+  tagline: "Cross-Platform iOS & Android Apps with Native-Level Performance.",
+  intro: [
+    "Your customers spend most of their screen time on their phones. A well-built mobile app keeps your service one tap away — but a slow or buggy one is quickly uninstalled.",
+    "Impetic builds cross-platform iOS and Android apps from one codebase, with smooth performance, clean design and the backend, notifications and analytics needed to keep users engaged.",
+  ],
+  capabilitiesTitle: "Mobile App Capabilities",
+  capabilities: [
+    { icon: Smartphone, title: "iOS & Android from one codebase" },
+    { icon: LayoutTemplate, title: "Mobile UI/UX design" },
+    { icon: Bell, title: "Push notifications & engagement" },
+    { icon: Server, title: "APIs & backend services" },
+    { icon: Lock, title: "Secure login & payments" },
+    { icon: Rocket, title: "App Store & Google Play publishing" },
+  ],
+  featureBlocks: [
+    { icon: Smartphone, title: "One Codebase, Two Platforms", description: "Cross-platform frameworks let us ship to both iOS and Android with shared code, reducing cost and keeping features in sync across platforms." },
+    { icon: LayoutTemplate, title: "Designed for Thumbs, Not Desktops", description: "We design mobile-first interfaces with intuitive navigation, fast load times and accessibility in mind, tested on real devices." },
+    { icon: Rocket, title: "From Build to App Store", description: "We handle app store requirements, submissions and updates, plus analytics and crash reporting so you can improve the app after launch." },
+  ],
+  examples: [
+    { title: "Customer booking app", description: "Customers book services, pay and receive reminders through a branded mobile app." },
+    { title: "Companion app for a web platform", description: "An existing web product gets a mobile app that shares the same accounts and data." },
+    { title: "Field team app", description: "Technicians view jobs, capture photos and update status on site, even with poor connectivity." },
+    { title: "Loyalty and ordering app", description: "A retail or food business lets customers order ahead and collect rewards." },
+  ],
+  benefits: [
+    "Reach customers on iOS and Android",
+    "Lower cost through shared code",
+    "Smooth, reliable user experience",
+    "Ongoing updates and support",
+  ],
+  processSteps: [
+    { step: "01", title: "Discovery", description: "Goals, users, features and platform requirements." },
+    { step: "02", title: "Design", description: "User flows, UI design and prototypes." },
+    { step: "03", title: "Development & Testing", description: "Build, integrate and test on real devices." },
+    { step: "04", title: "Launch & Iterate", description: "Store release, analytics and updates." },
+  ],
+  ctaTitle: "Build Your Mobile App",
+  ctaDescription: "Tell us what your app needs to do.",
+  faqs: [
+    { q: "Do you build native or cross-platform apps?", a: "We usually build cross-platform apps for iOS and Android from a single codebase, and recommend native development when a project needs it." },
+    { q: "How long does it take to build a mobile app?", a: "A first version typically takes a few months depending on features, design and integrations." },
+    { q: "Can you publish the app to the stores for us?", a: "Yes. We prepare store listings, handle submissions and manage updates on the App Store and Google Play." },
+    { q: "Can the app work with our existing website or system?", a: "Yes. We connect the app to your existing backend, or build the APIs it needs." },
+    { q: "Do you maintain apps after launch?", a: "Yes. We provide updates for new OS versions, bug fixes and new features." },
+  ],
+}
 
 export default function MobileAppDevelopmentPage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Smartphone, title: 'React Native & Expo cross-platform apps' },
-    { icon: Zap, title: 'Native iOS & Android performance tuning' },
-    { icon: Globe, title: 'Offline-first sync & push notifications' },
-    { icon: ShieldCheck, title: 'App Store & Google Play publishing' },
-  ]
-
-  const featureBlocks = [
-    { icon: Smartphone, title: 'Cross-Platform Mobile Apps', description: 'Build native-level iOS and Android applications from a unified, high-performance codebase.', badge: 'Mobile Engineering' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'UX Prototyping', description: 'Design fluid touch interactions and mobile wireframes.' },
-    { step: '02', title: 'Mobile Build', description: 'Develop cross-platform components with offline data syncing.' },
-    { step: '03', title: 'Store Release', description: 'Deploy to Apple App Store and Google Play.' },
-  ]
-
-  const faqs = [{ q: 'Do you support iOS and Android simultaneously?', a: 'Yes. We build cross-platform mobile apps using React Native / Expo that deliver native performance on both iOS and Android.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="MOBILE APP DEVELOPMENT" title={<>Mobile App <span className="flux-word">Development</span></>} description="Cross-Platform iOS &amp; Android Apps with Native-Level Performance." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Fluid, responsive mobile applications for iOS and Android built on React Native engineering.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Mobile <span className="flux-word">Stack</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Build Your Mobile App" description="Contact our mobile engineering team." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }

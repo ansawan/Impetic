@@ -1,54 +1,60 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Layers, Compass, Code, ShieldCheck, ArrowRight } from 'lucide-react'
-import { PageHero } from '@/components/layout/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { ContentPanel } from '@/components/ui/ContentPanel'
-import { TimelineNode } from '@/components/cards/TimelineNode'
+import { Cloud, Database, Layers, Search, ShieldCheck, Users } from 'lucide-react'
+import { ServiceDetailPage, type ServiceDetailContent } from '@/components/templates/ServiceDetailPage'
 
-const ScrollScene = dynamic(() => import('@/components/3d/ScrollScene').then((m) => m.ScrollScene), { ssr: false })
-const NeuralGraphScene = dynamic(() => import('@/components/3d/scenes/NeuralGraphScene').then((m) => m.NeuralGraphScene), { ssr: false })
+const content: ServiceDetailContent = {
+  eyebrow: "PRODUCT ENGINEERING & ARCHITECTURE",
+  titleLead: "Product Engineering",
+  titleAccent: "& Architecture",
+  tagline: "Strategic Technical Architecture and Scalable System Blueprints.",
+  intro: [
+    "Early technical decisions shape how fast a product can grow. The wrong architecture leads to slow releases, rising cloud bills and painful rewrites; the right one lets small teams move quickly with confidence.",
+    "Impetic helps you design, review and evolve the architecture behind your product — from choosing the stack and data model to planning for scale, security and a smooth path from prototype to platform.",
+  ],
+  capabilitiesTitle: "Architecture Capabilities",
+  capabilities: [
+    { icon: Layers, title: "System & solution architecture" },
+    { icon: Search, title: "Architecture & code reviews" },
+    { icon: Database, title: "Data modeling & storage strategy" },
+    { icon: Cloud, title: "Cloud architecture & cost planning" },
+    { icon: ShieldCheck, title: "Security & reliability design" },
+    { icon: Users, title: "Technical leadership & team guidance" },
+  ],
+  featureBlocks: [
+    { icon: Layers, title: "Blueprints Before Building", description: "We translate product goals into a clear technical design: components, data flows, integrations and the trade-offs behind each decision, documented for your team." },
+    { icon: Search, title: "Independent Technical Reviews", description: "We review existing systems and code to identify bottlenecks, risks and quick wins, with a prioritized plan to fix what matters most." },
+    { icon: Users, title: "Engineering Leadership on Demand", description: "For teams without a senior architect, we provide fractional technical leadership to guide decisions, mentor developers and keep delivery on track." },
+  ],
+  examples: [
+    { title: "Pre-build architecture plan", description: "A startup gets a documented architecture, stack choice and roadmap before hiring developers." },
+    { title: "Scaling review", description: "A growing product identifies database and infrastructure bottlenecks before they cause outages." },
+    { title: "Cloud cost reduction", description: "A team reduces its monthly cloud spend by redesigning over-provisioned services." },
+    { title: "Due diligence", description: "Investors or acquirers receive an independent assessment of a product’s technology and risks." },
+  ],
+  benefits: [
+    "Fewer costly rewrites later",
+    "Faster, safer releases",
+    "Predictable infrastructure costs",
+    "Confidence in technical decisions",
+  ],
+  processSteps: [
+    { step: "01", title: "Context", description: "Understand product goals, constraints and current systems." },
+    { step: "02", title: "Analysis", description: "Review architecture, code and infrastructure." },
+    { step: "03", title: "Design", description: "Produce target architecture and roadmap." },
+    { step: "04", title: "Guidance", description: "Support the team through implementation." },
+  ],
+  ctaTitle: "Get Your Architecture Right",
+  ctaDescription: "Book an architecture review or planning session.",
+  faqs: [
+    { q: "What does a software architect do?", a: "A software architect designs how a system is structured — its components, data, integrations and infrastructure — so it meets requirements for performance, security and growth." },
+    { q: "When should we invest in architecture?", a: "Before building a new product, before scaling significantly, or when releases slow down and problems keep recurring." },
+    { q: "Do you only give advice or also build?", a: "Both. We can deliver architecture and reviews only, or our engineering team can implement the plan." },
+    { q: "What do we receive from an architecture review?", a: "A report covering findings, risks and recommendations, with a prioritized roadmap and diagrams of the current and target architecture." },
+    { q: "Can you work with our in-house developers?", a: "Yes. We often work alongside internal teams, providing guidance, reviews and hands-on support." },
+  ],
+}
 
 export default function ProductEngineeringArchitecturePage() {
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0)
-
-  const capabilities = [
-    { icon: Compass, title: 'Domain-driven technical architecture design' },
-    { icon: Layers, title: 'Scalable system blueprints & microservices' },
-    { icon: Code, title: 'Tech stack selection & technical due diligence' },
-    { icon: ShieldCheck, title: 'Fault-tolerant cloud infrastructure' },
-  ]
-
-  const featureBlocks = [
-    { icon: Compass, title: 'Strategic Product Architecture', description: 'Architect resilient software blueprints designed to scale to millions of concurrent requests.', badge: 'Architecture' },
-  ]
-
-  const processSteps = [
-    { step: '01', title: 'System Discovery', description: 'Map domain entities, data flows, and non-functional requirements.' },
-    { step: '02', title: 'Blueprint Design', description: 'Design component blueprints, database schemas, and microservice boundaries.' },
-    { step: '03', title: 'Engineering Oversight', description: 'Guide development teams through implementation and code reviews.' },
-  ]
-
-  const faqs = [{ q: 'What is technical product architecture?', a: 'Technical architecture defines the structural design of software systems, ensuring scalability, security, and maintainability over time.' }]
-
-  return (
-    <>
-      <ScrollScene keyframes={[{ t: 0, pos: [0, 0, 8.5], look: [0, 0, 0] }, { t: 1, pos: [0, 0, 6.5], look: [0, 0, -1] }]}><NeuralGraphScene /></ScrollScene>
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between">
-        <main className="grow w-full max-w-7xl mx-auto px-6 sm:px-12">
-          <PageHero eyebrow="PRODUCT ENGINEERING &amp; ARCHITECTURE" title={<>Product Engineering <span className="flux-word">&amp; Architecture</span></>} description="Strategic Technical Architecture and Scalable System Blueprints." />
-          <div className="text-center -mt-6 mb-16"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Book Consultation <ArrowRight className="w-4 h-4" /></Link></div>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto"><p className="text-base sm:text-lg text-white">Engineering durable technical blueprints, domain-driven design, and enterprise system specifications.</p></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><SectionHeading align="center" eyebrow="Capabilities" title={<>Architecture <span className="flux-word">Design</span></>} /><div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">{capabilities.map((c, i) => (<div key={i} className="p-5 rounded-2xl border border-white/8 bg-white/[0.02] flex items-center gap-4"><c.icon className="w-5 h-5 text-[#4DE8DC]" /><span className="text-sm font-semibold">{c.title}</span></div>))}</div></ContentPanel></section>
-          <section className="py-12"><div className="max-w-5xl mx-auto space-y-8">{featureBlocks.map((b, i) => (<ContentPanel key={i}><h3 className="text-xl font-bold">{b.title}</h3><p className="text-base text-white mt-2">{b.description}</p></ContentPanel>))}</div></section>
-          <section className="py-12"><ContentPanel className="max-w-5xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">{processSteps.map((s, i) => (<TimelineNode key={i} index={i} year={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />))}</div></ContentPanel></section>
-          <section className="my-16 max-w-4xl mx-auto"><ContentPanel className="text-center"><SectionHeading align="center" eyebrow="Take Action" title="Design Your System Blueprint" description="Contact our lead software architects today." /><div className="mt-8"><Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#2FBFB0] to-[#4DE8DC] text-[#12191C] font-bold text-sm uppercase">Get Started <ArrowRight className="w-4 h-4" /></Link></div></ContentPanel></section>
-          <section className="py-12"><ContentPanel className="max-w-4xl mx-auto">{faqs.map((f, i) => (<div key={i} className="p-6 border border-white/8 bg-white/[0.02] rounded-2xl mb-4"><h4 className="font-semibold">{f.q}</h4><p className="text-sm text-white mt-2">{f.a}</p></div>))}</ContentPanel></section>
-        </main>
-      </div>
-    </>
-  )
+  return <ServiceDetailPage content={content} />
 }
