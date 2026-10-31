@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/virtual-assistant/' },
-  title: 'Virtual Assistant Services for Growing Businesses | Impetic',
+  title: "Virtual Assistant Services for Business | Impetic",
   description:
-    'Delegate admin, CRM, lead generation, onboarding and marketing operations to trained Impetic virtual assistants backed by AI tooling. Stop doing everything yourself.',
+    "Hire dedicated virtual assistant services for admin, email, CRM, lead generation and customer support. Save time and cut costs. Book a free consultation.",
   openGraph: {
-    title: 'Virtual Assistant Services for Growing Businesses | Impetic',
+    title: "Virtual Assistant Services for Business | Impetic",
     description:
-      'Delegate admin, CRM, lead generation, onboarding and marketing operations to trained Impetic virtual assistants backed by AI tooling. Stop doing everything yourself.',
+      "Hire dedicated virtual assistant services for admin, email, CRM, lead generation and customer support. Save time and cut costs. Book a free consultation.",
     type: 'website',
   },
 }

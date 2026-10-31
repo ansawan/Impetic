@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/seo/' },
-  title: 'AI-Powered SEO Services | Best AI SEO Agency 2026 — Impetic',
+  title: "AI SEO Services & Technical SEO Agency | Impetic",
   description:
-    "Impetic combines generative AI, technical SEO, and local search expertise to get you found first. See why we're rated among the top AI-driven SEO agencies in the US.",
+    "AI SEO services that combine technical SEO, generative AI visibility and local search to get you found first. Start with a free SEO audit.",
   openGraph: {
-    title: 'AI-Powered SEO Services | Best AI SEO Agency 2026 — Impetic',
+    title: "AI SEO Services & Technical SEO Agency | Impetic",
     description:
-      "Impetic combines generative AI, technical SEO, and local search expertise to get you found first. See why we're rated among the top AI-driven SEO agencies in the US.",
+      "AI SEO services that combine technical SEO, generative AI visibility and local search to get you found first. Start with a free SEO audit.",
     type: 'website',
   },
 }

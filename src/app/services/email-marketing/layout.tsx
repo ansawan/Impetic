@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/email-marketing/' },
-  title: 'Email Marketing Agency | Full-Service, B2B & White Label — Impetic',
+  title: "Email Marketing Agency for B2B & SaaS | Impetic",
   description:
-    'Impetic is a full-service email marketing agency that builds campaigns people actually open. B2B, SaaS, white label, and targeted email done right.',
+    "Email marketing agency for B2B, SaaS and white-label campaigns built for high open rates, retention and revenue. Request a free email audit.",
   openGraph: {
-    title: 'Email Marketing Agency | Full-Service, B2B & White Label — Impetic',
+    title: "Email Marketing Agency for B2B & SaaS | Impetic",
     description:
-      'Impetic is a full-service email marketing agency that builds campaigns people actually open. B2B, SaaS, white label, and targeted email done right.',
+      "Email marketing agency for B2B, SaaS and white-label campaigns built for high open rates, retention and revenue. Request a free email audit.",
     type: 'website',
   },
 }

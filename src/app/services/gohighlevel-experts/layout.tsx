@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/gohighlevel-experts/' },
-  title: 'GoHighLevel Experts — Setup, Automation & Funnel Services | Impetic',
+  title: "GoHighLevel Experts for CRM & Funnel Management | Impetic",
   description:
-    'Professional GoHighLevel expert services to manage, optimize, and maintain your GoHighLevel account. CRM management, automations, sales funnels, and onboarding support.',
+    "Hire GoHighLevel experts to build, manage and optimize your CRM, workflows and funnels. Dedicated support keeps your pipeline moving. Get a quote.",
   openGraph: {
-    title: 'GoHighLevel Experts — Setup, Automation & Funnel Services | Impetic',
+    title: "GoHighLevel Experts for CRM & Funnel Management | Impetic",
     description:
-      'Professional GoHighLevel expert services to manage, optimize, and maintain your GoHighLevel account. CRM management, automations, sales funnels, and onboarding support.',
+      "Hire GoHighLevel experts to build, manage and optimize your CRM, workflows and funnels. Dedicated support keeps your pipeline moving. Get a quote.",
     type: 'website',
   },
 }

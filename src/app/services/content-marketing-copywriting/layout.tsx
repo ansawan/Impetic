@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/content-marketing-copywriting/' },
-  title: 'SEO Content Writing Services & Agency | Impetic',
+  title: "Content Marketing Services & SEO Copywriting | Impetic",
   description:
-    'Impetic is an SEO content writing company that writes for people first, search engines second — and still ranks. Content built to convert, not just fill a word count.',
+    "Content marketing services with SEO copywriting that speaks to readers first and is built for search visibility and conversions. Get a free quote.",
   openGraph: {
-    title: 'SEO Content Writing Services & Agency | Impetic',
+    title: "Content Marketing Services & SEO Copywriting | Impetic",
     description:
-      'Impetic is an SEO content writing company that writes for people first, search engines second — and still ranks. Content built to convert, not just fill a word count.',
+      "Content marketing services with SEO copywriting that speaks to readers first and is built for search visibility and conversions. Get a free quote.",
     type: 'website',
   },
 }

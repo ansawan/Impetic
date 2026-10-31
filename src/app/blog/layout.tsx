@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/blog/' },
-  title: 'Impetic Blog — AI, Engineering & Digital Growth Insights',
+  title: "Impetic Blog | SEO, AI & Web Development Insights",
   description:
-    'Technical deep-dives on production AI systems, WebGL and Next.js engineering, technical SEO and digital growth from the Impetic team.',
+    "The Impetic Blog shares practical insights on SEO, digital marketing, AI systems and web development to help your business grow online.",
   openGraph: {
-    title: 'Impetic Blog — AI, Engineering & Digital Growth Insights',
+    title: "Impetic Blog | SEO, AI & Web Development Insights",
     description:
-      'Technical deep-dives on production AI systems, WebGL and Next.js engineering, technical SEO and digital growth from the Impetic team.',
+      "The Impetic Blog shares practical insights on SEO, digital marketing, AI systems and web development to help your business grow online.",
     type: 'website',
   },
 }

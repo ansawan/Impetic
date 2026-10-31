@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/linkedin-advertising/' },
-  title: 'LinkedIn Advertising Agency & Cost Guide | Impetic',
+  title: "LinkedIn Advertising Agency for B2B Lead Gen | Impetic",
   description:
-    'Impetic runs LinkedIn ad campaigns built for B2B results, not just impressions. Straight answers on LinkedIn advertising cost, CPC, and what actually works.',
+    "LinkedIn advertising agency focused on decision-maker targeting, pipeline impact and lower cost per lead. Grow your B2B pipeline. Get a free audit.",
   openGraph: {
-    title: 'LinkedIn Advertising Agency & Cost Guide | Impetic',
+    title: "LinkedIn Advertising Agency for B2B Lead Gen | Impetic",
     description:
-      'Impetic runs LinkedIn ad campaigns built for B2B results, not just impressions. Straight answers on LinkedIn advertising cost, CPC, and what actually works.',
+      "LinkedIn advertising agency focused on decision-maker targeting, pipeline impact and lower cost per lead. Grow your B2B pipeline. Get a free audit.",
     type: 'website',
   },
 }

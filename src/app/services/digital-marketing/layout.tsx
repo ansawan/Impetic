@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/digital-marketing/' },
-  title: 'Digital Marketing Services — SEO, PPC & Social | Impetic',
+  title: "Digital Marketing Services That Drive Growth | Impetic",
   description:
-    'Data-driven digital marketing from Impetic: SEO, Google Ads and PPC, social media, content, email marketing, CRO and analytics built to scale revenue.',
+    "Data-driven digital marketing services including SEO, PPC, social media, email and CRO. Get a free marketing and tracking audit from Impetic.",
   openGraph: {
-    title: 'Digital Marketing Services — SEO, PPC & Social | Impetic',
+    title: "Digital Marketing Services That Drive Growth | Impetic",
     description:
-      'Data-driven digital marketing from Impetic: SEO, Google Ads and PPC, social media, content, email marketing, CRO and analytics built to scale revenue.',
+      "Data-driven digital marketing services including SEO, PPC, social media, email and CRO. Get a free marketing and tracking audit from Impetic.",
     type: 'website',
   },
 }

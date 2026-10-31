@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/web-development/' },
-  title: 'Website Development Company | CMS, Shopify & WooCommerce — Impetic',
+  title: "Website Development Company for Shopify & WordPress",
   description:
-    'Impetic builds fast, responsive websites on the platform that actually fits your business — CMS, Shopify, or WooCommerce. Built to convert, not just look nice.',
+    "Website development company building CMS, Shopify, WooCommerce and B2B sites that convert on desktop and mobile. Get a free project quote.",
   openGraph: {
-    title: 'Website Development Company | CMS, Shopify & WooCommerce — Impetic',
+    title: "Website Development Company for Shopify & WordPress",
     description:
-      'Impetic builds fast, responsive websites on the platform that actually fits your business — CMS, Shopify, or WooCommerce. Built to convert, not just look nice.',
+      "Website development company building CMS, Shopify, WooCommerce and B2B sites that convert on desktop and mobile. Get a free project quote.",
     type: 'website',
   },
 }

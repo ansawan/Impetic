@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/tiktok-ads/' },
-  title: 'TikTok Advertising Agency & Cost Guide | Impetic',
+  title: "TikTok Ads Agency | Native TikTok Ad Campaigns",
   description:
-    'Impetic runs TikTok ad campaigns built for how people actually watch — not skip. Straight answers on TikTok advertising cost, and a strategy to match.',
+    "TikTok ads agency creating native-feeling campaigns built for how people scroll, watch and buy. Reach new audiences and convert them. Get a quote.",
   openGraph: {
-    title: 'TikTok Advertising Agency & Cost Guide | Impetic',
+    title: "TikTok Ads Agency | Native TikTok Ad Campaigns",
     description:
-      'Impetic runs TikTok ad campaigns built for how people actually watch — not skip. Straight answers on TikTok advertising cost, and a strategy to match.',
+      "TikTok ads agency creating native-feeling campaigns built for how people scroll, watch and buy. Reach new audiences and convert them. Get a quote.",
     type: 'website',
   },
 }

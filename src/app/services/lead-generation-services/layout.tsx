@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/lead-generation-services/' },
-  title: 'Lead Generation Virtual Assistant Services | Impetic',
+  title: "Lead Generation Services | Verified Leads & Meetings",
   description:
-    'Dedicated B2B lead generation virtual assistants for prospect research, list building, CRM management, appointment setting, and cold outreach.',
+    "Lead generation services that find prospects, build verified contact lists and book qualified sales meetings. Fill your pipeline with Impetic.",
   openGraph: {
-    title: 'Lead Generation Virtual Assistant Services | Impetic',
+    title: "Lead Generation Services | Verified Leads & Meetings",
     description:
-      'Dedicated B2B lead generation virtual assistants for prospect research, list building, CRM management, appointment setting, and cold outreach.',
+      "Lead generation services that find prospects, build verified contact lists and book qualified sales meetings. Fill your pipeline with Impetic.",
     type: 'website',
   },
 }

@@ -13,6 +13,13 @@ import { CTAOverlay } from '@/components/overlays/CTAOverlay'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
+  title: "Digital Marketing, AI & Web Development | Impetic",
+  description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
+  openGraph: {
+    title: "Digital Marketing, AI & Web Development | Impetic",
+    description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
+    type: 'website',
+  },
 }
 
 export default function Home() {

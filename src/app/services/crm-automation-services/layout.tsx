@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/crm-automation-services/' },
-  title: 'CRM and Automation Virtual Assistant Services | Impetic',
+  title: "CRM Automation Services & Virtual Assistants | Impetic",
   description:
-    'Dedicated CRM virtual assistant support to organize customer data, manage automations, clean up databases, and keep sales pipelines running smoothly.',
+    "CRM automation services to organize customer data, build follow-up workflows and clean your database. Get dedicated assistant support. Request a quote.",
   openGraph: {
-    title: 'CRM and Automation Virtual Assistant Services | Impetic',
+    title: "CRM Automation Services & Virtual Assistants | Impetic",
     description:
-      'Dedicated CRM virtual assistant support to organize customer data, manage automations, clean up databases, and keep sales pipelines running smoothly.',
+      "CRM automation services to organize customer data, build follow-up workflows and clean your database. Get dedicated assistant support. Request a quote.",
     type: 'website',
   },
 }

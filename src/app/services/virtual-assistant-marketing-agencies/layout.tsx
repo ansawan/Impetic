@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/virtual-assistant-marketing-agencies/' },
-  title: 'Virtual Assistant for Marketing Agencies — White-Label Support | Impetic',
+  title: "Virtual Assistant for Marketing Agencies | White-Label",
   description:
-    'White-label virtual assistants for marketing agencies: client account support, campaign execution, reporting, project coordination and scalable capacity as you grow.',
+    "A virtual assistant for marketing agencies: white-label support for client accounts, reporting and campaign execution. Scale without extra hires.",
   openGraph: {
-    title: 'Virtual Assistant for Marketing Agencies — White-Label Support | Impetic',
+    title: "Virtual Assistant for Marketing Agencies | White-Label",
     description:
-      'White-label virtual assistants for marketing agencies: client account support, campaign execution, reporting, project coordination and scalable capacity as you grow.',
+      "A virtual assistant for marketing agencies: white-label support for client accounts, reporting and campaign execution. Scale without extra hires.",
     type: 'website',
   },
 }

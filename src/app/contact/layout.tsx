@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/contact/' },
-  title: 'Contact Impetic — Start a Project',
+  title: "Contact Impetic | Get a Free Quote or Audit",
   description:
-    'Talk to Impetic about AI automation, software development, virtual assistants or digital marketing. Our team responds within 24 hours.',
+    "Contact Impetic to discuss your marketing, AI or software project. Share your goals and budget and get a reply within 24 business hours.",
   openGraph: {
-    title: 'Contact Impetic — Start a Project',
+    title: "Contact Impetic | Get a Free Quote or Audit",
     description:
-      'Talk to Impetic about AI automation, software development, virtual assistants or digital marketing. Our team responds within 24 hours.',
+      "Contact Impetic to discuss your marketing, AI or software project. Share your goals and budget and get a reply within 24 business hours.",
     type: 'website',
   },
 }

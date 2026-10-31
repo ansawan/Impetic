@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/executive-assistants/' },
-  title: 'Executive Assistant Services — Strategic Delegation | Impetic',
+  title: "Remote Executive Assistants for Busy Leaders | Impetic",
   description:
-    'Dedicated remote Executive Assistant services for founders, CEOs, and business leaders. Calendar management, inbox organization, travel planning, and administrative support.',
+    "Hire remote executive assistants to manage your calendar, inbox, projects and admin work. Free up your day to focus on growth. Get a free quote.",
   openGraph: {
-    title: 'Executive Assistant Services — Strategic Delegation | Impetic',
+    title: "Remote Executive Assistants for Busy Leaders | Impetic",
     description:
-      'Dedicated remote Executive Assistant services for founders, CEOs, and business leaders. Calendar management, inbox organization, travel planning, and administrative support.',
+      "Hire remote executive assistants to manage your calendar, inbox, projects and admin work. Free up your day to focus on growth. Get a free quote.",
     type: 'website',
   },
 }

@@ -13,8 +13,8 @@ const jetbrainsMono = { variable: 'font-mono' }
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'IMPETIC — 3D WebGL Software Studio',
-  description: 'Engineering high-performance WebGL web applications, intelligent AI systems, cloud infrastructure, and digital growth platforms.',
+  title: "Digital Marketing, AI & Web Development | Impetic",
+  description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
   keywords: ['Software Studio', 'Three.js', 'React Three Fiber', 'Next.js 15', 'AI Integration', 'WebGL 3D', 'Digital Marketing'],
   icons: {
     icon: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     apple: '/impetic.svg',
   },
   openGraph: {
-    title: 'IMPETIC — 3D WebGL Software Studio',
-    description: 'Engineering the continuous digital current that moves your product forward.',
+    title: "Digital Marketing, AI & Web Development | Impetic",
+    description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
     type: 'website',
   },
 }

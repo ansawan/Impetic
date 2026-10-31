@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/custom-web-design/' },
-  title: 'Custom Web Design & Development Services | Impetic',
+  title: "Custom Web Design & Development Services | Impetic",
   description:
-    'Impetic builds custom websites and ecommerce stores — including Magento — designed around your business, not a recycled template. Affordable custom design done right.',
+    "Custom web design and development for bespoke sites, custom ecommerce and Magento builds with complex workflows. Request a free quote.",
   openGraph: {
-    title: 'Custom Web Design & Development Services | Impetic',
+    title: "Custom Web Design & Development Services | Impetic",
     description:
-      'Impetic builds custom websites and ecommerce stores — including Magento — designed around your business, not a recycled template. Affordable custom design done right.',
+      "Custom web design and development for bespoke sites, custom ecommerce and Magento builds with complex workflows. Request a free quote.",
     type: 'website',
   },
 }

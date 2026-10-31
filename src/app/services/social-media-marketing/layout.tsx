@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/social-media-marketing/' },
-  title: 'Social Media Marketing Agency | Impetic',
+  title: "Social Media Marketing Agency for Brand Growth | Impetic",
   description:
-    'Impetic is a social media marketing company that builds strategy around real business results, not just post count. Small business, enterprise, local, and financial services experience.',
+    "Social media marketing agency for local, B2B and enterprise brands. Organic growth, paid social and strategy that drives leads. Get a free quote.",
   openGraph: {
-    title: 'Social Media Marketing Agency | Impetic',
+    title: "Social Media Marketing Agency for Brand Growth | Impetic",
     description:
-      'Impetic is a social media marketing company that builds strategy around real business results, not just post count. Small business, enterprise, local, and financial services experience.',
+      "Social media marketing agency for local, B2B and enterprise brands. Organic growth, paid social and strategy that drives leads. Get a free quote.",
     type: 'website',
   },
 }

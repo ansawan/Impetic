@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/client-onboarding-services/' },
-  title: 'Client Onboarding Virtual Assistant Services | Impetic',
+  title: "Client Onboarding Services | Faster Setup, Happy Clients",
   description:
-    'Client onboarding virtual assistants who handle intake forms, document collection, account setup and welcome sequences so every new client starts fast and nothing slips.',
+    "Client onboarding services that streamline intake, document collection and account setup so new clients get started faster. Request a quote today.",
   openGraph: {
-    title: 'Client Onboarding Virtual Assistant Services | Impetic',
+    title: "Client Onboarding Services | Faster Setup, Happy Clients",
     description:
-      'Client onboarding virtual assistants who handle intake forms, document collection, account setup and welcome sequences so every new client starts fast and nothing slips.',
+      "Client onboarding services that streamline intake, document collection and account setup so new clients get started faster. Request a quote today.",
     type: 'website',
   },
 }

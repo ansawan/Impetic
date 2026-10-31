@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/sem/' },
-  title: 'SEM Marketing Services | SEO, SEM & PPC Under One Roof — Impetic',
+  title: "Search Engine Marketing (SEM) Services | Impetic",
   description:
-    'Impetic runs SEO, SEM, and PPC as one connected strategy — not three separate invoices. See how full-funnel search marketing actually grows your business.',
+    "Search engine marketing that unites SEO, SEM and PPC in one roadmap, so every channel works together to grow leads. Request a free SEM audit.",
   openGraph: {
-    title: 'SEM Marketing Services | SEO, SEM & PPC Under One Roof — Impetic',
+    title: "Search Engine Marketing (SEM) Services | Impetic",
     description:
-      'Impetic runs SEO, SEM, and PPC as one connected strategy — not three separate invoices. See how full-funnel search marketing actually grows your business.',
+      "Search engine marketing that unites SEO, SEM and PPC in one roadmap, so every channel works together to grow leads. Request a free SEM audit.",
     type: 'website',
   },
 }

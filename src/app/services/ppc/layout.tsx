@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/services/ppc/' },
-  title: 'Pay-Per-Click Advertising Services | Top PPC Agency — Impetic',
+  title: "PPC Advertising Services | Multi-Channel Management",
   description:
-    "Impetic is a pay-per-click advertising company that treats your budget like it's ours. Local or national, we build PPC campaigns that actually convert.",
+    "PPC advertising services with multi-channel strategy, local landing page optimization and high-converting ad management. Get a free PPC audit.",
   openGraph: {
-    title: 'Pay-Per-Click Advertising Services | Top PPC Agency — Impetic',
+    title: "PPC Advertising Services | Multi-Channel Management",
     description:
-      "Impetic is a pay-per-click advertising company that treats your budget like it's ours. Local or national, we build PPC campaigns that actually convert.",
+      "PPC advertising services with multi-channel strategy, local landing page optimization and high-converting ad management. Get a free PPC audit.",
     type: 'website',
   },
 }
