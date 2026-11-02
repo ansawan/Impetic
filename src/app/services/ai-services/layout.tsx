@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { withPageSeo } from '@/lib/pageMetadata'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: '/services/ai-services/' },
   title: "AI Automation Services for Business | Impetic",
   description:
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
       "Custom AI automation services: LLM chatbots, RAG, AI agents and workflow automation built on your data. Book a free AI consultation with Impetic.",
     type: 'website',
   },
+}
+
+// Values saved in Admin → SEO override these at build time.
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo('/services/ai-services/', fallbackMetadata)
 }
 
 export default function AIServicesLayout({ children }: { children: React.ReactNode }) {

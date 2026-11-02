@@ -208,11 +208,7 @@ export const blogService = {
           .eq('slug', slug)
           .single();
 
-        if (!error && data) {
-          // increment view count silently
-          await supabase.from('blogs').update({ views: (data.views || 0) + 1 }).eq('id', data.id);
-          return data as Blog;
-        }
+        if (!error && data) return data as Blog;
       } catch (e) {
         console.warn('Supabase getBlogBySlug error', e);
       }
@@ -302,8 +298,7 @@ export const blogService = {
     };
 
     if (isSupabaseConfigured()) {
-      try {
-        const { data, error } = await supabase.from('blogs').insert([{
+      const { data, error } = await supabase.from('blogs').insert([{
           title: newBlog.title,
           slug: newBlog.slug,
           excerpt: newBlog.excerpt,
@@ -318,10 +313,8 @@ export const blogService = {
           published_at: newBlog.published_at,
         }]).select().single();
 
-        if (!error && data) return data as Blog;
-      } catch (e) {
-        console.warn('Supabase createBlog error', e);
-      }
+      if (error) throw new Error(`Could not save the article: ${error.message}`);
+      return data as Blog;
     }
 
     MOCK_BLOGS.unshift(newBlog);
@@ -331,17 +324,17 @@ export const blogService = {
   // Update Blog
   async updateBlog(id: string, updates: Partial<Blog>): Promise<Blog | null> {
     if (isSupabaseConfigured()) {
-      try {
-        const payload: any = { ...updates, updated_at: new Date().toISOString() };
-        if (updates.status === 'published' && !updates.published_at) {
-          payload.published_at = new Date().toISOString();
-        }
-
-        const { data, error } = await supabase.from('blogs').update(payload).eq('id', id).select().single();
-        if (!error && data) return data as Blog;
-      } catch (e) {
-        console.warn('Supabase updateBlog error', e);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const payload: any = { ...updates, updated_at: new Date().toISOString() };
+      delete payload.category;
+      delete payload.tags;
+      if (updates.status === 'published' && !updates.published_at) {
+        payload.published_at = new Date().toISOString();
       }
+
+      const { data, error } = await supabase.from('blogs').update(payload).eq('id', id).select().single();
+      if (error) throw new Error(`Could not update the article: ${error.message}`);
+      return data as Blog;
     }
 
     const idx = MOCK_BLOGS.findIndex(b => b.id === id);
@@ -355,12 +348,9 @@ export const blogService = {
   // Delete Blog
   async deleteBlog(id: string): Promise<boolean> {
     if (isSupabaseConfigured()) {
-      try {
-        const { error } = await supabase.from('blogs').delete().eq('id', id);
-        if (!error) return true;
-      } catch (e) {
-        console.warn('Supabase deleteBlog error', e);
-      }
+      const { error } = await supabase.from('blogs').delete().eq('id', id);
+      if (error) throw new Error(`Could not delete the article: ${error.message}`);
+      return true;
     }
 
     const idx = MOCK_BLOGS.findIndex(b => b.id === id);

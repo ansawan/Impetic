@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { withPageSeo } from '@/lib/pageMetadata'
 import { HeroOverlay } from '@/components/overlays/HeroOverlay'
 import { LogoMarquee } from '@/components/sections/LogoMarquee'
 import { AboutTeaserOverlay } from '@/components/overlays/AboutTeaserOverlay'
@@ -11,7 +12,7 @@ import { TestimonialsOverlay } from '@/components/overlays/TestimonialsOverlay'
 import { StatsOverlay } from '@/components/overlays/StatsOverlay'
 import { CTAOverlay } from '@/components/overlays/CTAOverlay'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: '/' },
   title: "Digital Marketing, AI & Web Development | Impetic",
   description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
@@ -20,6 +21,11 @@ export const metadata: Metadata = {
     description: "Impetic is a digital marketing company delivering SEO, PPC, AI automation, virtual assistants and web development to grow your business. Get a free audit.",
     type: 'website',
   },
+}
+
+// Values saved in Admin → SEO override these at build time.
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo('/', fallbackMetadata)
 }
 
 export default function Home() {

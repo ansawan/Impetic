@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { withPageSeo } from '@/lib/pageMetadata'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: '/services/bing-ads/' },
   title: "Bing Ads Agency | Lower CPC Microsoft Advertising",
   description:
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
       "Bing Ads agency reaching high-value Microsoft search users with lower CPCs and optimized Bing Shopping campaigns. Request a free account audit.",
     type: 'website',
   },
+}
+
+// Values saved in Admin → SEO override these at build time.
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo('/services/bing-ads/', fallbackMetadata)
 }
 
 export default function BingAdsLayout({ children }: { children: React.ReactNode }) {

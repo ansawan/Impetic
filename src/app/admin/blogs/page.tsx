@@ -41,7 +41,7 @@ export default function AdminBlogsListPage() {
       await blogService.updateBlog(blog.id, { status: newStatus })
       setBlogs(blogs.map(b => (b.id === blog.id ? { ...b, status: newStatus } : b)))
     } catch (err) {
-      alert('Failed updating status')
+      alert(err instanceof Error ? err.message : 'Failed updating status')
     }
   }
 
@@ -53,7 +53,7 @@ export default function AdminBlogsListPage() {
       setBlogs(blogs.filter(b => b.id !== confirmDeleteBlog.id))
       setConfirmDeleteBlog(null)
     } catch (err) {
-      alert('Failed deleting article')
+      alert(err instanceof Error ? err.message : 'Failed deleting article')
     } finally {
       setDeletingId(null)
     }

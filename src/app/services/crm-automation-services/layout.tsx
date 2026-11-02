@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { withPageSeo } from '@/lib/pageMetadata'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: '/services/crm-automation-services/' },
   title: "CRM Automation Services & Virtual Assistants | Impetic",
   description:
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
       "CRM automation services to organize customer data, build follow-up workflows and clean your database. Get dedicated assistant support. Request a quote.",
     type: 'website',
   },
+}
+
+// Values saved in Admin → SEO override these at build time.
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeo('/services/crm-automation-services/', fallbackMetadata)
 }
 
 export default function CRMAutomationServicesLayout({ children }: { children: React.ReactNode }) {

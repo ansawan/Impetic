@@ -101,9 +101,9 @@ export default function AdminSeoSettingsPage() {
       setPagesSeoList(
         pagesSeoList.map((p) => (p.page_slug === selectedPageSlug ? updatedRecord : p))
       )
-      alert(`SEO settings saved for ${pageName}!`)
+      alert(`SEO settings saved for ${pageName}. The live website updates automatically in about 5 minutes.`)
     } catch (err) {
-      alert('Failed saving page SEO settings')
+      alert(err instanceof Error ? err.message : 'Failed saving page SEO settings')
     } finally {
       setSaving(false)
     }

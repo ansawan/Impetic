@@ -116,9 +116,10 @@ export function EditBlogForm({ id }: EditBlogFormProps) {
         seo_description: updatedSeo.meta_description,
         seo: updatedSeo,
       })
+      alert('Article updated. The live website updates automatically in about 5 minutes.')
       router.push('/admin/blogs')
     } catch (err) {
-      alert('Failed to update article')
+      alert(err instanceof Error ? err.message : 'Failed to update article')
     } finally {
       setSaving(false)
     }

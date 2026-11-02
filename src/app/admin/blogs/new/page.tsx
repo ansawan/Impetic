@@ -81,9 +81,10 @@ export default function AdminNewBlogPage() {
         seo_description: finalSeo.meta_description,
         seo: finalSeo,
       })
+      alert(status === 'published' ? 'Article saved. The live website updates automatically in about 5 minutes.' : 'Draft saved.')
       router.push('/admin/blogs')
     } catch (err) {
-      alert('Failed to save article')
+      alert(err instanceof Error ? err.message : 'Failed to save article')
     } finally {
       setSaving(false)
     }

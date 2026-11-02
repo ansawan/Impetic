@@ -57,3 +57,11 @@ Add these in GitHub → Settings → Secrets and variables → Actions:
 | `NEXT_PUBLIC_SITE_URL` | Optional, e.g. `https://impetic.com` |
 
 Until `FTP_SERVER` is set the workflow only builds; it does not deploy.
+
+### Admin edits go live automatically
+
+Blogs and page SEO (meta title, description, OG, canonical, noindex) saved in `/admin` are published without code changes:
+saving in the admin → Supabase trigger → GitHub Actions rebuild → Hostinger upload (about 5 minutes).
+
+One-time setup: create a GitHub fine-grained token for `ansawan/Impetic` with **Contents: Read and write**, paste it into
+[`supabase/auto-publish.sql`](supabase/auto-publish.sql) and run that file in Supabase → SQL Editor. A daily 03:00 UTC rebuild runs as a fallback.

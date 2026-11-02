@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Fired by Supabase when a blog or page SEO is saved in /admin (see supabase/auto-publish.sql)
+  repository_dispatch:
+    types: [content-updated]
+  # Daily safety net in case a trigger was missed
+  schedule:
+    - cron: "0 3 * * *"
 
 concurrency:
   group: deploy-hostinger

@@ -448,12 +448,9 @@ export const seoService = {
     MOCK_PAGE_SEO[slug] = record;
 
     if (isSupabaseConfigured()) {
-      try {
-        const { data, error } = await supabase.from('page_seo').upsert(record).select().single();
-        if (!error && data) return data as PageSeoRecord;
-      } catch (e) {
-        console.error('Failed updating page_seo in Supabase', e);
-      }
+      const { data, error } = await supabase.from('page_seo').upsert(record).select().single();
+      if (error) throw new Error(`Could not save page SEO: ${error.message}`);
+      return data as PageSeoRecord;
     }
     return record;
   },
