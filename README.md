@@ -65,3 +65,15 @@ saving in the admin → Supabase trigger → GitHub Actions rebuild → Hostinge
 
 One-time setup: create a GitHub fine-grained token for `ansawan/Impetic` with **Contents: Read and write**, paste it into
 [`supabase/auto-publish.sql`](supabase/auto-publish.sql) and run that file in Supabase → SQL Editor. A daily 03:00 UTC rebuild runs as a fallback.
+
+## Hosting: Vercel or Hostinger (same code)
+
+| | Vercel | Hostinger |
+| --- | --- | --- |
+| Build command | `npm run build` (Vercel runs it) | `npm run build:hostinger` (GitHub Actions runs it) |
+| Admin edits go live | instantly (admin calls `/api/revalidate`) | ~5 min (Supabase trigger → rebuild → FTP) |
+| Redirects | `next.config.ts` (from `src/lib/redirects.ts`) | `public/.htaccess` |
+
+**Switch to Vercel:** import the repo in Vercel, add `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SITE_URL`, point the domain's `A`/`www` records to Vercel (leave MX/email records alone), then disable the "Deploy to Hostinger" workflow in GitHub → Actions.
+
+**Switch back to Hostinger:** re-enable the "Deploy to Hostinger" workflow (it builds the static export and uploads it), point the domain's `A`/`www` records back to Hostinger.

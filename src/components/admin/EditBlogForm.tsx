@@ -7,6 +7,7 @@ import { RichTextEditor } from '@/components/admin/RichTextEditor'
 import { ImageUploader } from '@/components/admin/ImageUploader'
 import { SeoFormSection } from '@/components/admin/SeoFormSection'
 import { blogService } from '@/lib/services/blogService'
+import { publishSiteChanges } from '@/lib/publishSite'
 import { seoService } from '@/lib/services/seoService'
 import { Category, BlogStatus, Blog, SeoData } from '@/lib/supabase/types'
 
@@ -116,7 +117,7 @@ export function EditBlogForm({ id }: EditBlogFormProps) {
         seo_description: updatedSeo.meta_description,
         seo: updatedSeo,
       })
-      alert('Article updated. The live website updates automatically in about 5 minutes.')
+      alert(`Article updated. ${await publishSiteChanges()}`)
       router.push('/admin/blogs')
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Failed to update article')
@@ -128,6 +129,7 @@ export function EditBlogForm({ id }: EditBlogFormProps) {
   const handleDelete = async () => {
     if (confirm(`Permanently delete "${title}"?`)) {
       await blogService.deleteBlog(id)
+      await publishSiteChanges()
       router.push('/admin/blogs')
     }
   }

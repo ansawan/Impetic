@@ -7,6 +7,7 @@ import { RichTextEditor } from '@/components/admin/RichTextEditor'
 import { ImageUploader } from '@/components/admin/ImageUploader'
 import { SeoFormSection } from '@/components/admin/SeoFormSection'
 import { blogService } from '@/lib/services/blogService'
+import { publishSiteChanges } from '@/lib/publishSite'
 import { Category, BlogStatus, SeoData } from '@/lib/supabase/types'
 
 export default function AdminNewBlogPage() {
@@ -81,7 +82,7 @@ export default function AdminNewBlogPage() {
         seo_description: finalSeo.meta_description,
         seo: finalSeo,
       })
-      alert(status === 'published' ? 'Article saved. The live website updates automatically in about 5 minutes.' : 'Draft saved.')
+      alert(status === 'published' ? `Article saved. ${await publishSiteChanges()}` : 'Draft saved.')
       router.push('/admin/blogs')
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Failed to save article')

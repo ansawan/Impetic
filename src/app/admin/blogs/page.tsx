@@ -6,6 +6,7 @@ import {
   AlertTriangle, Check, RefreshCw
 } from 'lucide-react'
 import { blogService } from '@/lib/services/blogService'
+import { publishSiteChanges } from '@/lib/publishSite'
 import { Blog, BlogStatus } from '@/lib/supabase/types'
 
 export default function AdminBlogsListPage() {
@@ -39,6 +40,7 @@ export default function AdminBlogsListPage() {
     const newStatus: BlogStatus = blog.status === 'published' ? 'draft' : 'published'
     try {
       await blogService.updateBlog(blog.id, { status: newStatus })
+      void publishSiteChanges()
       setBlogs(blogs.map(b => (b.id === blog.id ? { ...b, status: newStatus } : b)))
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Failed updating status')
@@ -50,6 +52,7 @@ export default function AdminBlogsListPage() {
     try {
       setDeletingId(confirmDeleteBlog.id)
       await blogService.deleteBlog(confirmDeleteBlog.id)
+      void publishSiteChanges()
       setBlogs(blogs.filter(b => b.id !== confirmDeleteBlog.id))
       setConfirmDeleteBlog(null)
     } catch (err) {

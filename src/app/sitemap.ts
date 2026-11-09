@@ -1,19 +1,25 @@
-import { execFileSync } from 'node:child_process';
 import { MetadataRoute } from 'next';
 import { blogService } from '@/lib/services/blogService';
 import { absoluteUrl } from '@/lib/site';
 
+// Rebuilt when the admin saves (Vercel), so new blog posts appear without a deploy.
 export const dynamic = 'force-static';
 
-// Last time a page's own source (page.tsx / layout.tsx) changed, from git history.
-// Falls back to the build time if git or the history is unavailable (e.g. a shallow clone).
+// Last git commit date of each page's own source (page.tsx / layout.tsx). Captured at build
+// time in next.config.ts, because git history is not available when the sitemap is regenerated.
+const PAGE_LASTMOD: Record<string, string> = (() => {
+  try {
+    return JSON.parse(process.env.PAGE_LASTMOD || '{}');
+  } catch {
+    return {};
+  }
+})();
+const BUILD_TIME = new Date().toISOString();
+
 function lastModified(route: string): string {
   const files = route === '' ? ['src/app/page.tsx'] : [`src/app${route}/page.tsx`, `src/app${route}/layout.tsx`];
-  try {
-    const iso = execFileSync('git', ['log', '-1', '--format=%cI', '--', ...files], { encoding: 'utf8' }).trim();
-    if (iso) return new Date(iso).toISOString();
-  } catch {}
-  return new Date().toISOString();
+  const dates = files.map((f) => PAGE_LASTMOD[f]).filter(Boolean).sort();
+  return dates.length ? new Date(dates[dates.length - 1]).toISOString() : BUILD_TIME;
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

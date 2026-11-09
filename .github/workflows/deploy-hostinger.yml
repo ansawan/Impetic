@@ -23,6 +23,7 @@ jobs:
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
       FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      DEPLOY_TARGET: hostinger # static export into out/ (Vercel builds itself and ignores this workflow)
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - run: npm run build:hostinger
 
       # Deploy only once FTP credentials are configured in repo secrets
       - name: Upload to Hostinger via FTP

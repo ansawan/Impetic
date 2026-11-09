@@ -15,6 +15,7 @@ import {
   Layers,
 } from 'lucide-react'
 import { seoService, STATIC_PAGES_LIST } from '@/lib/services/seoService'
+import { publishSiteChanges } from '@/lib/publishSite'
 import { SiteSeoSettings, RedirectRule, PageSeoRecord, SeoData } from '@/lib/supabase/types'
 import { ImageUploader } from '@/components/admin/ImageUploader'
 import { SeoFormSection } from '@/components/admin/SeoFormSection'
@@ -101,7 +102,7 @@ export default function AdminSeoSettingsPage() {
       setPagesSeoList(
         pagesSeoList.map((p) => (p.page_slug === selectedPageSlug ? updatedRecord : p))
       )
-      alert(`SEO settings saved for ${pageName}. The live website updates automatically in about 5 minutes.`)
+      alert(`SEO settings saved for ${pageName}. ${await publishSiteChanges()}`)
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Failed saving page SEO settings')
     } finally {
