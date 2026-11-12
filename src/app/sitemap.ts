@@ -4,6 +4,7 @@ import { absoluteUrl } from '@/lib/site';
 
 // Rebuilt when the admin saves (Vercel), so new blog posts appear without a deploy.
 export const dynamic = 'force-static';
+export const revalidate = 60;
 
 // Last git commit date of each page's own source (page.tsx / layout.tsx). Captured at build
 // time in next.config.ts, because git history is not available when the sitemap is regenerated.

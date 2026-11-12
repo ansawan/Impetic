@@ -13,6 +13,10 @@ interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
+// Allow dynamically rendering newly published posts on-demand without redeploying
+export const dynamicParams = true;
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const blogs = await blogService.getStaticBlogs();
   return blogs.map((blog) => ({

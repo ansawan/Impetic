@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "build:hostinger": "next build --webpack",
+    "build:hostinger": "node scripts/build-hostinger.mjs",
     "start": "next start",
     "lint": "eslint"
   },

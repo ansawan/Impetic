@@ -34,8 +34,6 @@ const nextConfig: NextConfig = {
   env: {
     PAGE_LASTMOD: JSON.stringify(pageLastModified()),
   },
-  // Server-only files (e.g. the instant-refresh API) are named *.server.ts and left out of the static export.
-  pageExtensions: isHostinger ? ['tsx', 'ts', 'jsx', 'js'] : ['tsx', 'ts', 'jsx', 'js', 'server.ts'],
   ...(isHostinger
     ? { output: 'export' as const }
     : {
