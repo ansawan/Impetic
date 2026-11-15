@@ -297,39 +297,130 @@
   margin: 0 !important;
 }
 
-/* Tables */
-.blog-article-content table {
-  width: 100% !important;
-  border-collapse: separate !important;
-  border-spacing: 0 !important;
-  margin: 2.25rem 0 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 0.875rem !important;
-  overflow: hidden !important;
-  background: rgba(255, 255, 255, 0.02) !important;
+/* Responsive Tables — Mobile & Desktop */
+.blog-table-wrapper {
+  margin: 2.25rem 0;
+  width: 100%;
 }
 
-.blog-article-content th {
-  background: rgba(77, 232, 220, 0.08) !important;
+.table-scroll-hint {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(77, 232, 220, 0.75);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.5rem;
+  background: rgba(77, 232, 220, 0.08);
+  border: 1px solid rgba(77, 232, 220, 0.2);
+}
+
+@media (min-width: 640px) {
+  .table-scroll-hint {
+    display: none !important;
+  }
+}
+
+.blog-table-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Custom scrollbar for tables */
+.blog-table-container::-webkit-scrollbar {
+  height: 6px;
+}
+.blog-table-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 0 0 0.875rem 0.875rem;
+}
+.blog-table-container::-webkit-scrollbar-thumb {
+  background: rgba(77, 232, 220, 0.35);
+  border-radius: 3px;
+}
+.blog-table-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(77, 232, 220, 0.65);
+}
+
+.blog-table-container table,
+.blog-article-content table {
+  width: 100% !important;
+  min-width: 580px; /* Guarantees columns stay readable and never crush into vertical letters on mobile */
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Table Headers (handles <th>, <thead>, and Google Docs first-row <td>) */
+.blog-table-container th,
+.blog-article-content th,
+.blog-table-container thead td,
+.blog-table-container tr:first-child td,
+.blog-article-content table:not(:has(thead)) tr:first-child td {
+  background: rgba(77, 232, 220, 0.09) !important;
   color: #4DE8DC !important;
   font-family: var(--font-mono), monospace !important;
   font-size: 0.85rem !important;
+  font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  padding: 0.85rem 1.15rem !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  letter-spacing: 0.06em !important;
+  padding: 0.95rem 1.25rem !important;
+  border-bottom: 2px solid rgba(77, 232, 220, 0.35) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
   text-align: left !important;
+  white-space: nowrap !important;
 }
 
-.blog-article-content td {
+.blog-table-container th *,
+.blog-article-content th *,
+.blog-table-container tr:first-child td *,
+.blog-article-content table:not(:has(thead)) tr:first-child td * {
+  color: #4DE8DC !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+/* Table Body Cells */
+.blog-table-container tbody tr:not(:first-child) td,
+.blog-table-container tr:not(:first-child) td {
   color: #EAF6F5 !important;
-  padding: 0.85rem 1.15rem !important;
+  padding: 0.95rem 1.25rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-  font-size: 0.975rem !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  vertical-align: top !important;
 }
 
-.blog-article-content tr:last-child td {
+.blog-table-container tbody tr:last-child td,
+.blog-table-container tr:last-child td {
   border-bottom: none !important;
+}
+
+.blog-table-container tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.blog-table-container td p {
+  margin: 0 !important;
+  line-height: 1.65 !important;
+  font-size: 0.95rem !important;
 }
 
 /* Code & Pre */

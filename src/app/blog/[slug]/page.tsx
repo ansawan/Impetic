@@ -78,14 +78,25 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 function cleanBlogContent(html: string): string {
   if (!html) return '';
-  return html
+  let cleaned = html
     .replace(/<span id="docs-internal-guid-[^"]*">/gi, '')
     .replace(/color:\s*(?:rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)|#000000|#000|#111111|#111|#222222|#222|black);?/gi, '')
     .replace(/font-family:\s*[^;"]+;?/gi, '')
     .replace(/font-size:\s*(?:9|10|11|12)pt;?/gi, '')
     .replace(/white-space:\s*pre(?:-wrap)?;?/gi, '')
     .replace(/background-color:\s*(?:transparent|#ffffff|#fff|white|rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\));?/gi, '')
-    .replace(/style=["']\s*;*\s*["']/gi, '');
+    .replace(/style=["']\s*;*\s*["']/gi, '')
+    // Strip fixed column widths from Google Docs so table can adapt
+    .replace(/<colgroup>[\s\S]*?<\/colgroup>/gi, '')
+    // Remove fixed heights on rows/cells
+    .replace(/height:\s*\d+(?:\.\d+)?(?:pt|px);?/gi, '');
+
+  // Wrap all tables in a responsive scrolling container with mobile swipe hint
+  cleaned = cleaned.replace(/<table([\s\S]*?)<\/table>/gi, (match) => {
+    return `<div class="blog-table-wrapper"><div class="table-scroll-hint sm:hidden">← Swipe to view table →</div><div class="blog-table-container"><table${match.slice(6)}</div></div>`;
+  });
+
+  return cleaned;
 }
 
 export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
@@ -110,10 +121,10 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between pt-24 pb-16">
-        <article className="grow w-full max-w-4xl mx-auto px-6 sm:px-8">
+      <div className="relative min-h-screen w-full text-[#EAF6F5] flex flex-col justify-between pt-20 sm:pt-24 pb-12 sm:pb-16">
+        <article className="grow w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Back Navigation */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 font-mono text-xs text-[#4DE8DC] hover:underline uppercase tracking-wider"
@@ -123,10 +134,10 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
           </div>
 
           {/* Article Header */}
-          <header className="space-y-6 mb-10 text-center sm:text-left">
-            <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-[#4DE8DC]">
+          <header className="space-y-4 sm:space-y-6 mb-8 sm:mb-10 text-center sm:text-left">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-3 font-mono text-xs text-[#4DE8DC]">
               {blog.category && (
-                <span className="px-3.5 py-1 rounded-full bg-[#4DE8DC]/10 border border-[#4DE8DC]/30 uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#4DE8DC]/10 border border-[#4DE8DC]/30 uppercase tracking-wider text-[11px] sm:text-xs">
                   {blog.category.name}
                 </span>
               )}
@@ -146,17 +157,19 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
               {blog.title}
             </h1>
 
-            <p className="text-lg sm:text-xl text-white/70 leading-relaxed max-w-3xl">
-              {blog.excerpt}
-            </p>
+            {blog.excerpt && (
+              <p className="text-base sm:text-xl text-white/70 leading-relaxed max-w-3xl">
+                {blog.excerpt}
+              </p>
+            )}
           </header>
 
           {/* Featured Hero Image */}
-          <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-white/15 mb-12 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+          <div className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 mb-8 sm:mb-12 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={blog.featured_image}
@@ -166,14 +179,14 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
           </div>
 
           {/* Main Body Content */}
-          <ContentPanel className="p-8 sm:p-12 mb-12">
+          <ContentPanel className="p-4 sm:p-8 md:p-12 mb-8 sm:mb-12">
             <div
               className="blog-article-content max-w-none text-base sm:text-lg leading-relaxed text-[#EAF6F5]"
               dangerouslySetInnerHTML={{ __html: cleanBlogContent(blog.content) }}
             />
 
             {/* Tags & Social Share Footer */}
-            <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs text-white/40 uppercase">Tags:</span>
                 {blog.tags && blog.tags.length > 0 ? (
@@ -214,7 +227,7 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
 
           {/* Related Articles Section */}
           {relatedPosts.length > 0 && (
-            <section className="mt-16 space-y-8">
+            <section className="mt-12 sm:mt-16 space-y-6 sm:space-y-8">
               <h3 className="text-2xl font-bold text-white font-mono uppercase tracking-wider">
                 Related Articles
               </h3>
