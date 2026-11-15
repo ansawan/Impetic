@@ -284,7 +284,22 @@ export function RichTextEditor({ value, onChange, placeholder = 'Write rich blog
           ref={editorRef}
           contentEditable
           onInput={handleInput}
-          className={`w-full p-6 text-base text-[#EAF6F5] leading-relaxed focus:outline-none overflow-y-auto prose prose-invert max-w-none ${
+          onPaste={(e) => {
+            const html = e.clipboardData.getData('text/html');
+            if (html && (html.includes('docs-internal-guid') || html.includes('color: rgb(0, 0, 0)') || html.includes('color:#000') || html.includes('color: black'))) {
+              e.preventDefault();
+              const cleaned = html
+                .replace(/<span id="docs-internal-guid-[^"]*">/gi, '')
+                .replace(/color:\s*(?:rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)|#000000|#000|#111111|#111|#222222|#222|black);?/gi, '')
+                .replace(/font-family:\s*[^;"]+;?/gi, '')
+                .replace(/font-size:\s*(?:9|10|11|12)pt;?/gi, '')
+                .replace(/white-space:\s*pre(?:-wrap)?;?/gi, '')
+                .replace(/background-color:\s*(?:transparent|#ffffff|#fff|white);?/gi, '');
+              document.execCommand('insertHTML', false, cleaned);
+              handleInput();
+            }
+          }}
+          className={`w-full p-6 text-base text-[#EAF6F5] leading-relaxed focus:outline-none overflow-y-auto blog-article-content max-w-none ${
             isFullscreen ? 'grow min-h-[400px]' : 'min-h-[280px] max-h-[600px]'
           }`}
           style={{ minHeight: '260px' }}

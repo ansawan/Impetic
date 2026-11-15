@@ -76,6 +76,18 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
   };
 }
 
+function cleanBlogContent(html: string): string {
+  if (!html) return '';
+  return html
+    .replace(/<span id="docs-internal-guid-[^"]*">/gi, '')
+    .replace(/color:\s*(?:rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)|#000000|#000|#111111|#111|#222222|#222|black);?/gi, '')
+    .replace(/font-family:\s*[^;"]+;?/gi, '')
+    .replace(/font-size:\s*(?:9|10|11|12)pt;?/gi, '')
+    .replace(/white-space:\s*pre(?:-wrap)?;?/gi, '')
+    .replace(/background-color:\s*(?:transparent|#ffffff|#fff|white|rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\));?/gi, '')
+    .replace(/style=["']\s*;*\s*["']/gi, '');
+}
+
 export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
   const resolvedParams = await params;
   const blog = await blogService.getBlogBySlug(resolvedParams.slug);
@@ -156,8 +168,8 @@ export default async function SingleBlogPage({ params }: BlogDetailPageProps) {
           {/* Main Body Content */}
           <ContentPanel className="p-8 sm:p-12 mb-12">
             <div
-              className="prose prose-invert prose-teal max-w-none text-base sm:text-lg leading-relaxed space-y-6 text-[#EAF6F5]"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
+              className="blog-article-content max-w-none text-base sm:text-lg leading-relaxed text-[#EAF6F5]"
+              dangerouslySetInnerHTML={{ __html: cleanBlogContent(blog.content) }}
             />
 
             {/* Tags & Social Share Footer */}
