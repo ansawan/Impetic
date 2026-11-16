@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, useState, useEffect } from 'react'
 import {
-  Bold, Italic, Underline, Heading1, Heading2, Heading3,
+  Bold, Italic, Underline, Heading1, Heading2, Heading3, Heading4, Pilcrow,
   List, ListOrdered, Quote, Code, Image as ImageIcon,
   Link as LinkIcon, Table, Video, RotateCcw, Maximize2, Minimize2, Eye
 } from 'lucide-react'
@@ -112,7 +112,15 @@ export function RichTextEditor({ value, onChange, placeholder = 'Write rich blog
   };
 
   const toggleHeading = (tag: string) => {
-    execCommand('formatBlock', `<${tag}>`);
+    try {
+      const ok = document.execCommand('formatBlock', false, `<${tag}>`);
+      if (!ok) {
+        document.execCommand('formatBlock', false, tag);
+      }
+    } catch {
+      document.execCommand('formatBlock', false, tag);
+    }
+    handleInput();
   };
 
   return (
@@ -125,27 +133,43 @@ export function RichTextEditor({ value, onChange, placeholder = 'Write rich blog
       <div className="flex flex-wrap items-center gap-1.5 p-3 bg-white/[0.04] border-b border-white/10 select-none">
         <button
           type="button"
-          onClick={() => toggleHeading('h2')}
-          title="Heading 2"
+          onClick={() => toggleHeading('p')}
+          title="Paragraph / Normal Text (<p>)"
+          className="p-2 rounded-lg text-white hover:bg-white/10 hover:text-[#4DE8DC] transition-colors"
+        >
+          <Pilcrow className="w-4 h-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => toggleHeading('h1')}
+          title="Heading 1 (<h1>)"
           className="p-2 rounded-lg text-white hover:bg-white/10 hover:text-[#4DE8DC] transition-colors"
         >
           <Heading1 className="w-4 h-4" />
         </button>
         <button
           type="button"
-          onClick={() => toggleHeading('h3')}
-          title="Heading 3"
+          onClick={() => toggleHeading('h2')}
+          title="Heading 2 (<h2>)"
           className="p-2 rounded-lg text-white hover:bg-white/10 hover:text-[#4DE8DC] transition-colors"
         >
           <Heading2 className="w-4 h-4" />
         </button>
         <button
           type="button"
-          onClick={() => toggleHeading('h4')}
-          title="Heading 4"
+          onClick={() => toggleHeading('h3')}
+          title="Heading 3 (<h3>)"
           className="p-2 rounded-lg text-white hover:bg-white/10 hover:text-[#4DE8DC] transition-colors"
         >
           <Heading3 className="w-4 h-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => toggleHeading('h4')}
+          title="Heading 4 (<h4>)"
+          className="p-2 rounded-lg text-white hover:bg-white/10 hover:text-[#4DE8DC] transition-colors"
+        >
+          <Heading4 className="w-4 h-4" />
         </button>
 
         <div className="w-px h-5 bg-white/15 mx-1" />
